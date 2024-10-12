@@ -19,3 +19,19 @@ export const createPost = async (postData: FieldValues) => {
     }
 
 };
+
+export const getMyposts = async (userData: FieldValues) => {
+    // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
+    const url = `http://localhost:5000/api/posts/my-posts?userId=${userData.userId}`
+    try {
+        const res = await fetch(url)
+        const result = await res.json();
+        // const result = await fetch('https://jsonplaceholder.typicode.com/todos/')
+        return result
+    } catch (error: any) {
+        throw new Error(error);
+    }
+
+};
+
+// export Myposts= as

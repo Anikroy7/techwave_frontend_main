@@ -5,6 +5,7 @@ import { Card, CardBody } from '@nextui-org/card';
 import { useUser } from "@/src/context/user.provider";
 import Loading from "@/src/components/UI/Loading";
 import Link from "next/link";
+import Myposts from "@/src/components/post/Myposts";
 
 const Settings = () => {
     const { user, isLoading } = useUser()
@@ -75,6 +76,21 @@ const Settings = () => {
                 <div className="flex w-full flex-col items-center">
                     <Tabs aria-label="Options" color="primary" variant="bordered">
                         <Tab
+                            key="posts"
+                            title={
+                                <div className="flex items-center space-x-2">
+                                    {/* <GalleryIcon /> */}
+                                    <span>My Posts</span>
+                                </div>
+                            }
+                        >
+                            <Card>
+                                <CardBody>
+                                    <Myposts />
+                                </CardBody>
+                            </Card>
+                        </Tab>
+                        <Tab
                             key="followings"
                             title={
                                 <div className="flex items-center space-x-2">
@@ -104,21 +120,7 @@ const Settings = () => {
                                 </CardBody>
                             </Card>
                         </Tab>
-                        <Tab
-                            key="posts"
-                            title={
-                                <div className="flex items-center space-x-2">
-                                    {/* <GalleryIcon /> */}
-                                    <span>My Posts</span>
-                                </div>
-                            }
-                        >
-                            <Card>
-                                <CardBody>
-                                    post Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </CardBody>
-                            </Card>
-                        </Tab>
+
                     </Tabs>
                 </div>
             </div >

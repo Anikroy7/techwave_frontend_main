@@ -14,3 +14,16 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
+
+
+export type TPost = {
+  _id: string
+  body: string;
+  attachments?: string[];
+  category: { id: number; name: string };
+  comments: { id: number; text: string; user: { id: number; name: string } }[];
+  upvote: number;
+  downvote: number;
+  user: { userId: number; name: string; profileImage?: string };
+  isDeleted: boolean;
+};

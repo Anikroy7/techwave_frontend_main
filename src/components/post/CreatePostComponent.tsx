@@ -88,7 +88,7 @@ export default function CreatePostComponent() {
     }
     useEffect(() => {
         if (!isPending && isSuccess && data?.success) {
-            router.push("/");
+            router.push("/profile/settings");
         }
     }, [isPending, isSuccess]);
 

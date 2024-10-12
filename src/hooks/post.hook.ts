@@ -1,7 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { createPost } from "../services/postService";
+import { createPost, getMyposts } from "../services/postService";
 
 export const useCreatePost = () => {
     return useMutation<any, Error, FieldValues>({
@@ -24,4 +24,11 @@ export const useCreatePost = () => {
             toast.error(error.message);
         },
     });
+}
+export const useGetMyposts = (userData:{userId: string}) => {
+    return useQuery({
+        queryKey: ["GET_MY_POSTS"],
+        queryFn: async () => await getMyposts(userData),
+    });
+
 }
