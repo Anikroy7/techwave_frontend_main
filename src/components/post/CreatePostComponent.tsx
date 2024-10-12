@@ -14,18 +14,28 @@ import TWSelect from "../UI/form/TWSelect";
 import TWForm from "../UI/form/TWForm";
 import { getCategories } from "@/src/services/categoryService";
 import { Badge } from "@nextui-org/badge";
+import { uploadMultipleImages } from "@/src/utils/uploadMultipleImages";
+import { useUser } from "@/src/context/user.provider";
+import { useCreatePost } from "@/src/hooks/post.hook";
+import { useRouter } from "next/navigation";
+import Loading from "../UI/Loading";
 
 type ICategory = {
     title: string
 }
 
+type TFormInput = {
+    category: string
+}
+
 export default function CreatePostComponent() {
     const [content, setContent] = useState("");
     const [avatarPreview, setAvatarPreview] = useState<string[]>([]);
-    const [newImage, setNewImage] = useState<File[]>([]);
+    const [images, setImages] = useState<File[]>([]);
     const [categories, setCategories] = useState<ICategory[]>([])
-
-
+    const { user } = useUser()
+    const { mutate: handleCreatePost, isPending, isSuccess, data } = useCreatePost();
+    const router = useRouter()
     const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const allFiles = e.target.files;
         if (allFiles?.length) {
@@ -33,7 +43,7 @@ export default function CreatePostComponent() {
                 const reader = new FileReader();
                 reader.onloadend = () => {
                     setAvatarPreview((prev) => [...prev, reader.result as string]);
-                    setNewImage((prev) => [...prev, allFiles[i] as File])
+                    setImages((prev) => [...prev, allFiles[i] as File])
                 };
                 reader.readAsDataURL(allFiles[i]);
             }
@@ -43,6 +53,7 @@ export default function CreatePostComponent() {
 
     const handleRemoveImage = (ind: number) => {
         setAvatarPreview([...avatarPreview.filter((image, index) => index !== ind)])
+        setImages([...images.filter((image, index) => index !== ind)])
     }
 
 
@@ -60,12 +71,30 @@ export default function CreatePostComponent() {
         }
     })
     // console.log(categoriessObj)
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data: TFormInput) => {
+        // console.log(data, content,newImage
+        let imageUrls: string[] = [];
+        if (images.length > 0) {
+            imageUrls = await uploadMultipleImages(images)
+        }
+        const postData = {
+            body: content,
+            attachments: imageUrls,
+            category: data.category,
+            user: user?.userId
+        }
+        handleCreatePost(postData)
+
     }
+    useEffect(() => {
+        if (!isPending && isSuccess && data?.success) {
+            router.push("/");
+        }
+    }, [isPending, isSuccess]);
 
     return (
         <>
+            {isPending && <Loading />}
             <ModalBody>
                 {/* Rich Text Editor */}
                 <TWForm

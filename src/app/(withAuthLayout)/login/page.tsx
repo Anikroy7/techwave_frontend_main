@@ -21,7 +21,7 @@ export type FormInput = {
 
 const LoginPage = () => {
   const { mutate: handleLoginUser, isPending, isSuccess, data } = useLoginUser();
-  const {setUser, setIsLoading}= useUser()
+  const {  setIsLoading } = useUser()
   const searchParams = useSearchParams()
   const router = useRouter();
   const redirect = searchParams.get("redirect");
@@ -35,6 +35,7 @@ const LoginPage = () => {
         setIsLoading(true)
         router.push(redirect);
       } else {
+        setIsLoading(true)
         router.push("/");
       }
     }
