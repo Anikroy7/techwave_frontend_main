@@ -7,9 +7,8 @@ import { TPost } from "@/src/types";
 const Myposts = () => {
     const { user, isLoading } = useUser();
     if (isLoading) return <Loading />
-    const { data, isPending, isSuccess } = useGetMyposts({ userId: user?.userId as string });
+    const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
 
-    console.log(data, isPending, isSuccess)
     return <>
         {isPending && <Loading />}
         <section className="flex flex-col gap-6">
