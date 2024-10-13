@@ -34,8 +34,12 @@ export type TUser = {
 export type TComment = {
   _id:string;
   text: string;
-  user: TUser;
-  post: TPost;
+  user: {
+    _id: string;
+    name: string;
+    profileImage?: string;
+};
+  post: string;
   isDeleted: boolean;
 }
 

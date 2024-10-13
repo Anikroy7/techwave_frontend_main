@@ -24,25 +24,25 @@ export default function Comments({ post }: { post: TPost }) {
         handleCreateComment(commentData);
     };
 
-    // When comment creation is successful, update local comments state
     useEffect(() => {
         if (isSuccess && data) {
-            const createdComment = {
-                _id: data.data._id, // Assuming the response contains the created comment
+            const createdComment: TComment = {
+                _id: data.data._id,
                 text: data.data.text,
                 user: {
-                    _id: user?.userId,
-                    name: user?.name,
+                    _id: user?.userId as string,
+                    name: user?.name as string,
                     profileImage: user?.profileImage || "/default-avatar.png",
                 },
+                post: post._id,
+                isDeleted: false, 
             };
-            console.log(createdComment)
-            // Add the new comment to the existing list of comments
+        
             setComments((prevComments) => [...prevComments, createdComment]);
-            setNewComment(""); // Clear the input field
+            setNewComment(""); 
         }
-        console.log(isSuccess, isPending, data)
     }, [isSuccess, data, user]);
+
 
     return (
         <>
