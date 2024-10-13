@@ -13,27 +13,27 @@ import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
-
-
-// import NavbarDropdown from "./NavbarDropdown";
-
-import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "@/src/components/UI/theme-switch";
-// import { useUser } from "@/src/context/user.provider";
 import Image from "next/image";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/dropdown";
 import { Avatar } from "@nextui-org/avatar";
-import { useUser } from "@/src/context/user.provider";
+
 import Loading from "./Loading";
+
+import { useUser } from "@/src/context/user.provider";
+import { ThemeSwitch } from "@/src/components/UI/theme-switch";
+import { siteConfig } from "@/src/config/site";
 import { logout } from "@/src/services/authService";
 
 export const Navbar = () => {
   const { user, isLoading } = useUser();
-  const router = useRouter()
+  const router = useRouter();
   const handleLogout = () => {
-    console.log('omoamdg')
     logout();
     router.push("/login");
   };
@@ -44,7 +44,12 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo9lsguElms4_3HsOiZYnDQjQc8iRPxN7-Qw&s" alt="" width={100} height={100} />
+            <Image
+              alt=""
+              height={100}
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo9lsguElms4_3HsOiZYnDQjQc8iRPxN7-Qw&s"
+              width={100}
+            />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
@@ -72,10 +77,8 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
-
       </NavbarContent>
       <div>
-
         <NavbarContent className="sm:hidden basis-1 pl-4">
           <ThemeSwitch />
           <NavbarMenuToggle />
@@ -98,9 +101,18 @@ export const Navbar = () => {
                 <p className="font-semibold">Signed in as</p>
                 <p className="font-semibold">{user?.email}</p>
               </DropdownItem>
-                <DropdownItem key="settings" onClick={()=>router.push('/profile/settings')}>My Settings</DropdownItem>
+              <DropdownItem
+                key="settings"
+                onClick={() => router.push("/profile/settings")}
+              >
+                My Settings
+              </DropdownItem>
               {/* </Link> */}
-              <DropdownItem onClick={()=>handleLogout()} key="logout" color="danger">
+              <DropdownItem
+                key="logout"
+                color="danger"
+                onClick={() => handleLogout()}
+              >
                 Log Out
               </DropdownItem>
             </DropdownMenu>

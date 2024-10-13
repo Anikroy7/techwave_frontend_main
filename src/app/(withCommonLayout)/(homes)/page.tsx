@@ -1,9 +1,6 @@
 import CreatePostModal from "@/src/components/UI/modal/CreatePostModal";
 
-
 export default function Feed() {
-
-
   return (
     <section className="min-h-screen">
       {/* Container */}
@@ -14,7 +11,6 @@ export default function Feed() {
           <CreatePostModal />
         </div>
       </div>
-
     </section>
   );
 }

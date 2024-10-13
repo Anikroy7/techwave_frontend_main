@@ -1,8 +1,9 @@
 "use client";
 
-import { IInput } from "@/src/types";
 import { Input } from "@nextui-org/input";
 import { useFormContext } from "react-hook-form";
+
+import { IInput } from "@/src/types";
 
 interface IProps extends IInput {}
 
@@ -18,11 +19,14 @@ export default function TWInput({
     register,
     formState: { errors },
   } = useFormContext();
+
+  const errorMessage = errors?.[name]?.message as string | undefined;
+
   return (
     <Input
       {...register(name)}
-      errorMessage={errors[name] ? (errors[name].message as string) : ""}
-      isInvalid={!!errors[name]}
+      errorMessage={errorMessage || ""}
+      isInvalid={!!errors?.[name]}
       label={label}
       required={required}
       size={size}

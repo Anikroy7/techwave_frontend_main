@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from "react";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-    return (
-        <>
-            {/* <Navbar /> */}
+  return (
+    <>
+      {/* <Navbar /> */}
 
-            {children}
-        </>
-    )
+      {children}
+    </>
+  );
 }

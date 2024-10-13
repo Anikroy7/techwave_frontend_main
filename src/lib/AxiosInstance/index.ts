@@ -1,10 +1,7 @@
 import axios from "axios";
-import { cookies } from "next/headers";
-
-import envConfig from "@/src/config/envConfig";
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: "http://localhost:5000/api",
 });
 
 // axiosInstance.interceptors.request.use(
@@ -19,9 +16,8 @@ const axiosInstance = axios.create({
 //     return config;
 //   },
 //   function (error) {
-//     return Promise.reject(error); 
+//     return Promise.reject(error);
 //   }
 // );
-
 
 export default axiosInstance;

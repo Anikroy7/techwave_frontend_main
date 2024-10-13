@@ -1,68 +1,73 @@
 import {
-    createContext,
-    Dispatch,
-    ReactNode,
-    SetStateAction,
-    useContext,
-    useEffect,
-    useState,
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
+
 import { getCurrentUser } from "../services/authService";
 
 type IUser = {
-    userId: string;
-    email: string;
-    role: string;
-    profileImage: string;
-    name: string;
-    followers?: IUser[];
-    following?: IUser[];
-    posts?: string[];
-    phone: string;
-    address: string
-}
+  userId: string;
+  email: string;
+  role: string;
+  profileImage: string;
+  name: string;
+  followers?: IUser[];
+  following?: IUser[];
+  posts?: string[];
+  phone: string;
+  address: string;
+};
 
 const UserContext = createContext<IUserProviderValues | undefined>(undefined);
 
 interface IUserProviderValues {
-    user: IUser | null;
-    isLoading: boolean;
-    setUser: (user: IUser | null) => void;
-    setIsLoading: Dispatch<SetStateAction<boolean>>;
+  user: IUser | null;
+  isLoading: boolean;
+  setUser: (user: IUser | null) => void;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<IUser | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<IUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const handleUser = async () => {
-        const user = await getCurrentUser();
-        setUser(user);
-        setIsLoading(false);
-    };
+  const handleUser = async () => {
+    const user = await getCurrentUser();
 
-    useEffect(() => {
-        handleUser();
-    }, [isLoading]);
+    setUser(user);
+    setIsLoading(false);
+  };
 
-    return (
-        <>
-            {!isLoading &&  <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
-                {children}
-            </UserContext.Provider>
-            }
-        </>
-    );
+  useEffect(() => {
+    handleUser();
+  }, [isLoading]);
+
+  return (
+    <>
+      {!isLoading && (
+        <UserContext.Provider
+          value={{ user, setUser, isLoading, setIsLoading }}
+        >
+          {children}
+        </UserContext.Provider>
+      )}
+    </>
+  );
 };
 
 export const useUser = () => {
-    const context = useContext(UserContext);
+  const context = useContext(UserContext);
 
-    if (context === undefined) {
-        throw new Error("useUser must be used within the UserProvider context");
-    }
+  if (context === undefined) {
+    throw new Error("useUser must be used within the UserProvider context");
+  }
 
-    return context;
+  return context;
 };
 
 export default UserProvider;
