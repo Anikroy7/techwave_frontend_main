@@ -21,7 +21,7 @@ import { jwtDecode } from "jwt-decode";
 
 export const signupUser = async (userData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `http://localhost:5000/api/auth/signup`;
+  const url = `https://techwave-backend-six.vercel.app/api/auth/signup`;
 
   try {
     const res = await fetch(url, {
@@ -41,7 +41,7 @@ export const signupUser = async (userData: FieldValues) => {
 };
 
 export const loginUser = async (userData: FieldValues) => {
-  const url = `http://localhost:5000/api/auth/signin`;
+  const url = `https://techwave-backend-six.vercel.app/api/auth/signin`;
 
   try {
     const res = await fetch(url, {
@@ -65,7 +65,7 @@ export const loginUser = async (userData: FieldValues) => {
 };
 
 export const updateUser = async (userData: FieldValues) => {
-  const url = `http://localhost:5000/api/users/me`;
+  const url = `https://techwave-backend-six.vercel.app/api/users/me`;
   const accessToken = cookies().get("accessToken");
   const refreshToken = cookies().get("refreshToken");
 
@@ -81,7 +81,7 @@ export const updateUser = async (userData: FieldValues) => {
     const result = await res.json();
 
     if (result.message) {
-      const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+      const res = await fetch("https://techwave-backend-six.vercel.app/api/auth/refresh-token", {
         method: "POST",
         credentials: "include",
         headers: {

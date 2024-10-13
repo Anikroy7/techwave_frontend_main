@@ -2,7 +2,7 @@ import { FieldValues } from "react-hook-form";
 
 export const createPost = async (postData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `http://localhost:5000/api/posts`;
+  const url = `https://techwave-backend-six.vercel.app/api/posts`;
 
   try {
     const res = await fetch(url, {
@@ -23,7 +23,7 @@ export const createPost = async (postData: FieldValues) => {
 
 export const getMyposts = async (userData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `http://localhost:5000/api/posts/my-posts?userId=${userData.userId}`;
+  const url = `https://techwave-backend-six.vercel.app/api/posts/my-posts?userId=${userData.userId}`;
 
   try {
     const res = await fetch(url);
@@ -55,7 +55,7 @@ export const updatePostVote = async (
       downvote: votes,
     };
   }
-  const url = `http://localhost:5000/api/posts/${postId}`;
+  const url = `https://techwave-backend-six.vercel.app/api/posts/${postId}`;
 
   try {
     const res = await fetch(url, {
