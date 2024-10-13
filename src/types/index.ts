@@ -5,7 +5,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 
-export interface IInput {
+export type IInput = {
   variant?: "flat" | "bordered" | "faded" | "underlined";
   size?: "sm" | "md" | "lg";
   required?: boolean;
@@ -14,14 +14,37 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
+export type TUser = {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  profileImage: string;
+  // dateOfBirth: string;
+  address: string;
+  role: "user" | "admin";
+  status: 'active' | 'blocked',
+  isDeleted: boolean
+  followers: TUser[];
+  following: TUser[];
+  posts: TPost[]   
+};
 
+// export type TComment = { id: number; text: string; user: { id: number; name: string } }
+export type TComment = {
+  _id:string;
+  text: string;
+  user: TUser;
+  post: TPost;
+  isDeleted: boolean;
+}
 
 export type TPost = {
   _id: string
   body: string;
   attachments?: string[];
   category: string;
-  comments: { id: number; text: string; user: { id: number; name: string } }[];
+  comments: TComment[];
   upvote: string[];
   downvote: string[];
   user: { _id: string; name: string; profileImage?: string };

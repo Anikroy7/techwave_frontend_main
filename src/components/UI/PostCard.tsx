@@ -9,6 +9,7 @@ import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import React, { useEffect, useState } from "react";
 import { AiFillLike, AiFillDislike, AiOutlineComment } from "react-icons/ai";
+import Comments from "../post/Comments";
 
 
 
@@ -90,9 +91,11 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
                     </Button>
                 </div>
                 <Button startContent={<AiOutlineComment />}>
-                    {post.comments.length} Comments
+                    {/* {post.comments.length} Comments */}
+                    {<Comments post={post} />}
                 </Button>
             </div>
+
         </Card>
     );
 };
