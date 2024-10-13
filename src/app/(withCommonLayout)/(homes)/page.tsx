@@ -1,6 +1,14 @@
+
+import AllPosts from "@/src/components/post/AllPosts";
 import CreatePostModal from "@/src/components/UI/modal/CreatePostModal";
 
+
 export default function Feed() {
+    // const { isLoading } = useUser();
+
+    
+
+    // if (isLoading) return <Loading />;
   return (
     <section className="min-h-screen">
       {/* Container */}
@@ -9,6 +17,9 @@ export default function Feed() {
         <div className="flex flex-col max-w-3xl mx-auto space-y-6">
           {/* Create a Post Section */}
           <CreatePostModal />
+        </div>
+        <div className="flex flex-col max-w-3xl mx-auto space-y-6">
+          <AllPosts/>
         </div>
       </div>
     </section>

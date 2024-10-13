@@ -35,6 +35,20 @@ export const getMyposts = async (userData: FieldValues) => {
     throw new Error(error);
   }
 };
+export const getAllposts = async () => {
+  // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
+  const url = `https://techwave-backend-six.vercel.app/api/posts`;
+
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+
+    // const result = await fetch('https://jsonplaceholder.typicode.com/todos/')
+    return result;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
 
 export const updatePostVote = async (
   postId: string,

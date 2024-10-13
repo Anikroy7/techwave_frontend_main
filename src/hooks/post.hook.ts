@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 import {
   createPost,
+  getAllposts,
   getMyposts,
   updatePostVote,
 } from "../services/postService";
@@ -36,6 +37,12 @@ export const useGetMyposts = (userData: { userId: string }) => {
   return useQuery({
     queryKey: ["GET_MY_POSTS"],
     queryFn: async () => await getMyposts(userData),
+  });
+};
+export const useGetAllposts = () => {
+  return useQuery({
+    queryKey: ["GET_ALL_POSTS"],
+    queryFn: async () => await getAllposts(),
   });
 };
 
