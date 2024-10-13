@@ -1,53 +1,45 @@
-# Next.js & NextUI Template
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+# TECHWAVE
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+The "Tech Tips & Tricks" project is a dynamic full-stack web application designed to help tech enthusiasts navigate and master the ever-evolving world of technology. Users will have access to expert advice, personal experiences, and user-generated content covering everything from troubleshooting common tech issues to learning about new software, apps, gadgets, and digital tools. The platform will cater to individuals seeking practical tech solutions, tutorials, reviews, and recommendations on products and services that enhance their digital lives. The application will feature user registration and authentication, allowing users to personalize their experience, share their own tips, upvote valuable insights, and interact with other tech enthusiasts. It will also offer premium content options via payment integration.
 
-## Technologies Used
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
 
-## How to Use
+## Tech Stack
 
-### Use the template with create-next-app
 
-To create a new project based on this template using `create-next-app`, run the following command:
+**Fronend:** Next js, Next ui, Typescript etc.
+**Server:** Node, Express, mongodb, mongoose etc.
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+  git clone https://github.com/Anikroy7/techwave_frontend_main.git
 ```
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Go to the project directory
 
 ```bash
-npm install
+  cd techwave_frontend_main
 ```
 
-### Run the development server
+Install dependencies
 
 ```bash
-npm run dev
+  npm install
 ```
 
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+Start the server
 
 ```bash
-public-hoist-pattern[]=*@nextui-org/*
+  npm run dev
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
 
-## License
+## Authors
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+- [@anikroy](https://github.com/Anikroy7)
+
