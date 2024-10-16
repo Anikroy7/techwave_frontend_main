@@ -14,6 +14,7 @@ export type IInput = {
   disabled?: boolean;
 };
 export type TUser = {
+  _id:string;
   name: string;
   email: string;
   password: string;
@@ -52,8 +53,8 @@ export type TPost = {
   upvote: string[];
   downvote: string[];
   user: {
-    _id: string; name: string; profileImage?: string, followers: TUser[]
-    following: TUser[]
+    _id: string; name: string; profileImage?: string, followers: string[]
+    following: string[]
   };
   isDeleted: boolean;
 };

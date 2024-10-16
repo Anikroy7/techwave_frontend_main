@@ -59,7 +59,7 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
         <div className="flex-grow">
           <div className="flex gap-3 items-center">
             <p className="font-bold">{post.user.name}</p>
-            {post.user.followers.includes(user?.userId as string) && <div className="flex items-center text-blue-500">
+            {post.user.following.includes(user?.userId as string) && <div className="flex items-center text-blue-500">
               <FiCheckCircle className="text-xl mr-2" />
               <p className="text-base">
                 following
