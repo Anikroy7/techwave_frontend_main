@@ -1,25 +1,41 @@
 
 import { DeleteDocumentIcon, EditDocumentIcon } from "@/src/assets/icons";
 import { useUser } from "@/src/context/user.provider";
-import { useUpdateUser } from "@/src/hooks/auth.hook";
 import { useDeletePost } from "@/src/hooks/post.hook";
+import { useUpdateFollowers } from "@/src/hooks/user.hook";
+import { TPost } from "@/src/types";
 import { Button } from "@nextui-org/button";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 import { cn } from "@nextui-org/theme";
 import { AiOutlineEllipsis, AiOutlineUserAdd, AiOutlineUserDelete } from 'react-icons/ai';
 
 
-export default function PostDropdown({ userId, postId }: { userId: string, postId: string }) {
+export default function PostDropdown({ userId, post }: { userId: string, post: TPost }) {
     const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0";
     const { user } = useUser();
     const { mutate: handlePostDelete } = useDeletePost();
-    const {mutate:handleUpdateUser}= useUpdateUser()
+    const { mutate: handleUpdateFollowers } = useUpdateFollowers()
     const handleDeletePost = () => {
-        handlePostDelete({ postId })
+        handlePostDelete({ postId: post._id })
     }
 
-    const handleAddFollow=()=>{
-        // handleUpdateUser({followers: [...user?.followers, user]})
+    const handleAddFollow = () => {
+        handleUpdateFollowers({
+            followData: {
+                followingId: user?.userId as string,
+                type: "add",
+                userId: post.user._id
+            }
+        })
+    }
+    const handleUnFollow = () => {
+        handleUpdateFollowers({
+            followData: {
+                followingId: user?.userId as string,
+                type: "delete",
+                userId: post.user._id
+            }
+        })
     }
     return (
         <Dropdown>
@@ -44,15 +60,15 @@ export default function PostDropdown({ userId, postId }: { userId: string, postI
                     className={`${user?.userId !== userId ? 'hidden' : ""} text-danger`}
                     color="danger"
                     description="Permanently delete the post"
-                    onClick={()=>handleDeletePost()}
+                    onClick={() => handleDeletePost()}
                     startContent={<DeleteDocumentIcon className={cn(iconClasses, "text-danger")} />}
                 >
                     Delete post
                 </DropdownItem>
                 <DropdownItem
                     key="follow"
-                    className={`${user?.userId === userId ? 'hidden' : ""} text-primary`}
-
+                    className={`${(user?.userId === userId || post.user.followers.includes(user?.userId as string)) ? 'hidden' : ""} text-primary`}
+                    onClick={() => handleAddFollow()}
                     color="primary"
                     description="Follow this user"
                     startContent={<AiOutlineUserAdd className="text-3xl" />}
@@ -61,10 +77,12 @@ export default function PostDropdown({ userId, postId }: { userId: string, postI
                 </DropdownItem>
                 <DropdownItem
                     key="unfollow"
-                    className={`${user?.userId === userId ? 'hidden' : ""} text-danger`}
+                    onClick={() => handleUnFollow()}
+                    className={`${(user?.userId === userId || !post.user.followers.includes(user?.userId as string)) ? 'hidden' : ""} text-danger`}
                     color="danger"
                     description="Unfollow this user"
                     startContent={<AiOutlineUserDelete className="text-3xl" />}
+
                 >
                     Unfollow
                 </DropdownItem>

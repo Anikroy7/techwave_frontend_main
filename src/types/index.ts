@@ -37,6 +37,7 @@ export type TComment = {
     _id: string;
     name: string;
     profileImage?: string;
+
   };
   post: string;
   isDeleted: boolean;
@@ -50,6 +51,9 @@ export type TPost = {
   comments: TComment[];
   upvote: string[];
   downvote: string[];
-  user: { _id: string; name: string; profileImage?: string };
+  user: {
+    _id: string; name: string; profileImage?: string, followers: TUser[]
+    following: TUser[]
+  };
   isDeleted: boolean;
 };

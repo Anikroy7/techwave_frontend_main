@@ -5,10 +5,9 @@ import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import React, { useEffect, useState } from "react";
-import { AiFillLike, AiFillDislike, AiOutlineComment, AiOutlineLike, AiOutlineDislike, AiOutlineUserAdd } from "react-icons/ai";
-
+import { AiFillLike, AiFillDislike, AiOutlineComment, AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import { FiCheckCircle } from 'react-icons/fi';
 import Comments from "../post/Comments";
-
 import { TPost } from "@/src/types";
 import { useUpdatePostVote } from "@/src/hooks/post.hook";
 import useDebounce from "@/src/hooks/debounce.hook";
@@ -47,7 +46,7 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
       handlePostVote({ postId: post._id, voteType: "down", votes: downvote });
     }
   }, [debouncedUpvote, debouncedDownvote])
-
+  console.log(post.user.followers, user?.userId)
   return (
     <Card className="my-4 w-full shadow-lg">
       <div className="flex p-4">
@@ -58,10 +57,19 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
           src={post.user.profileImage || "/default-avatar.png"}
         />
         <div className="flex-grow">
-          <h4 className="font-bold">{post.user.name}</h4>
+          <div className="flex gap-3 items-center">
+            <p className="font-bold">{post.user.name}</p>
+            {post.user.followers.includes(user?.userId as string) && <div className="flex items-center text-blue-500">
+              <FiCheckCircle className="text-xl mr-2" />
+              <p className="text-base">
+                following
+              </p>
+            </div>}
+          </div>
           <p className="text-gray-500">{post.category}</p>
         </div>
-        <PostDropdown userId={post.user._id} postId= {post._id}/>
+
+        <PostDropdown userId={post.user._id} post={post} />
       </div>
       <Divider />
       <div className="p-4">
