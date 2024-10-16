@@ -4,10 +4,13 @@ import { toast } from "sonner";
 
 import {
   createPost,
+  deletePost,
   getAllposts,
   getMyposts,
+  updatePost,
   updatePostVote,
 } from "../services/postService";
+import { queryClient } from "../lib/Providers";
 
 export const useCreatePost = () => {
   return useMutation<any, Error, FieldValues>({
@@ -46,6 +49,8 @@ export const useGetAllposts = () => {
   });
 };
 
+
+
 export const useUpdatePostVote = () => {
   return useMutation<
     any,
@@ -53,11 +58,72 @@ export const useUpdatePostVote = () => {
     { postId: string; voteType: string; votes: string[] }
   >({
     mutationKey: ["CREATE_POST_VOTE"],
+
     mutationFn: async ({ postId, voteType, votes }) =>
       await updatePostVote(postId, voteType, votes),
     onSuccess: (data) => {
       if (data) {
         if (data.success) {
+          // toast.success(data.message);
+        }
+        if (!data.success) {
+          data.errorSources.map((e: { message: string }, index: number) =>
+            toast.error(e.message, { id: `error-${index}` }),
+          );
+        }
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+    onError: (error) => {
+      // console.log(error)
+      toast.error(error.message);
+    },
+  });
+};
+
+
+export const useUpdatePost = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["UPDATE_POST"],
+
+    mutationFn: async ({ postId, postData}) =>
+      await updatePost(postId,postData),
+    onSuccess: (data) => {
+      if (data) {
+        if (data.success) {
+          // toast.success(data.message);
+        }
+        if (!data.success) {
+          data.errorSources.map((e: { message: string }, index: number) =>
+            toast.error(e.message, { id: `error-${index}` }),
+          );
+        }
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+    onError: (error) => {
+      // console.log(error)
+      toast.error(error.message);
+    },
+  });
+};
+export const useDeletePost = () => {
+  return useMutation<
+    any,
+    Error,
+    { postId: string; }
+  >({
+    mutationKey: ["DELETE_POST"],
+
+    mutationFn: async (postId) =>
+      await deletePost(postId),
+    onSuccess: (data) => {
+      if (data) {
+        if (data.success) {
+          queryClient.invalidateQueries({ queryKey: ['GET_ALL_POSTS'] })
+          queryClient.invalidateQueries({ queryKey: ['GET_MY_POSTS'] })
           toast.success(data.message);
         }
         if (!data.success) {

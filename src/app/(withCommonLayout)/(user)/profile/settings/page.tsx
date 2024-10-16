@@ -7,13 +7,16 @@ import Link from "next/link";
 import { useUser } from "@/src/context/user.provider";
 import Loading from "@/src/components/UI/Loading";
 import Myposts from "@/src/components/post/Myposts";
+import { useGetMyposts } from "@/src/hooks/post.hook";
 
 const Settings = () => {
   const { user, isLoading } = useUser();
+  const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
+
 
   return (
     <main className="bg-default bg-opacity-25">
-      {isLoading && <Loading />}
+      {(isLoading||isPending) && <Loading />}
       <div className="lg:w-8/12 lg:mx-auto mb-8">
         <header className="flex flex-wrap items-center p-4 md:py-8">
           <div className="md:w-3/12 md:ml-16">
@@ -54,7 +57,7 @@ const Settings = () => {
 
             <ul className="hidden md:flex space-x-8 mb-4">
               <li>
-                <span className="font-semibold">{user?.posts?.length} </span>
+                <span className="font-semibold">{data?.data?.length} </span>
                 posts
               </li>
 

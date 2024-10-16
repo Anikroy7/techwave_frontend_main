@@ -7,7 +7,6 @@ import { TPost } from "@/src/types";
 
 const Myposts = () => {
   const { user, isLoading } = useUser();
-
   const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
 
   if (isLoading) return <Loading />;
@@ -15,11 +14,11 @@ const Myposts = () => {
   return (
     <>
       {isPending && <Loading />}
-      <section className="flex flex-col gap-6">
-        {data?.data?.length > 0 &&
+      <section className="flex flex-col gap-6 w-full" >
+        {data?.data?.length > 0 ?
           data?.data?.map((post: TPost) => (
             <PostCard key={post._id} post={post} />
-          ))}
+          )):"No posts available..."}
       </section>
     </>
   );
