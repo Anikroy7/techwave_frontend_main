@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import { updateFollowers } from "../services/userService";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getMyInfo, updateFollowers } from "../services/userService";
 import { toast } from "sonner";
 import { queryClient } from "../lib/Providers";
 
@@ -19,6 +19,7 @@ export const useUpdateFollowers = () => {
                     toast.success(data.message);
                     queryClient.invalidateQueries({ queryKey: ['GET_ALL_POSTS'] })
                     queryClient.invalidateQueries({ queryKey: ['GET_MY_POSTS'] })
+                    queryClient.invalidateQueries({ queryKey: ['GET_MY_INFO'] })
                 }
                 if (!data.success) {
                     data.errorSources.map((e: { message: string }, index: number) =>
@@ -35,3 +36,10 @@ export const useUpdateFollowers = () => {
         },
     });
 };
+
+export const userGetMyInfo = () => {
+    return useQuery({
+        queryKey: ["GET_MY_INFO"],
+        queryFn: async () => await getMyInfo(),
+    });
+}

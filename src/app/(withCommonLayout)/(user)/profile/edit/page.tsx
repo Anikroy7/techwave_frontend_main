@@ -12,6 +12,7 @@ import { useUser } from "@/src/context/user.provider";
 import { useUpdateUser } from "@/src/hooks/auth.hook";
 import updateUserValidationSchema from "@/src/schemas/updateUser.schema";
 import uploadImage from "@/src/utils/uploadImage";
+import { userGetMyInfo } from "@/src/hooks/user.hook";
 
 type FormInput = {
   name: string;
@@ -21,8 +22,9 @@ type FormInput = {
 };
 
 const ProfileEditPage = () => {
-  const { user, isLoading, setUser, setIsLoading } = useUser();
-  const [avatarPreview, setAvatarPreview] = useState(user?.profileImage);
+  const { data: myData, isPending: myInfoPending } = userGetMyInfo()
+  const { setIsLoading } = useUser()
+  const [avatarPreview, setAvatarPreview] = useState(myData?.data?.profileImage);
   const [newImage, setNewImage] = useState<File | null>(null);
   const {
     mutate: handleUpdateUser,
@@ -49,8 +51,8 @@ const ProfileEditPage = () => {
   useEffect(() => {
     if (!isPending && isSuccess && data?.success) {
       router.push("/profile/settings");
-      setUser(user);
-      setIsLoading(true);
+      setIsLoading(true)
+
     }
   }, [isPending, isSuccess]);
 
@@ -62,7 +64,7 @@ const ProfileEditPage = () => {
     }
     const updatedData = {
       ...data,
-      profileImage: newImageUrl ? newImageUrl : user?.profileImage,
+      profileImage: newImageUrl ? newImageUrl : myData?.data?.profileImage,
     };
 
     handleUpdateUser(updatedData);
@@ -71,7 +73,7 @@ const ProfileEditPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center p-6 ">
-      {(isLoading || isPending) && <Loading />}
+      {(myInfoPending || isPending) && <Loading />}
       <div className="w-full max-w-2xl p-6 bg-defa rounded-lg shadow-lg">
         <h1 className="text-2xl font-semibold mb-4 text-center">
           Edit Profile
@@ -117,9 +119,9 @@ const ProfileEditPage = () => {
 
         <TWForm
           defaultValues={{
-            name: user?.name,
-            phone: user?.phone,
-            address: user?.address,
+            name: myData?.data?.name,
+            phone: myData?.data?.phone,
+            address: myData?.data?.address,
           }}
           resolver={zodResolver(updateUserValidationSchema)}
           onSubmit={onSubmit}

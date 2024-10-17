@@ -7,6 +7,7 @@ import {
   deletePost,
   getAllposts,
   getMyposts,
+  getSinglePost,
   updatePost,
   updatePostVote,
 } from "../services/postService";
@@ -46,6 +47,12 @@ export const useGetAllposts = () => {
   return useQuery({
     queryKey: ["GET_ALL_POSTS"],
     queryFn: async () => await getAllposts(),
+  });
+};
+export const useGetSinglePost = (postId:string) => {
+  return useQuery({
+    queryKey: ["GET_SINGLE_POST"],
+    queryFn: async () => await getSinglePost(postId),
   });
 };
 

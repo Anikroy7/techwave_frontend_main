@@ -54,7 +54,9 @@ export type TPost = {
   downvote: string[];
   user: {
     _id: string; name: string; profileImage?: string, followers: string[]
-    following: string[]
+    following: string[],
+    isVerified:boolean
   };
+  createdAt:string;
   isDeleted: boolean;
 };

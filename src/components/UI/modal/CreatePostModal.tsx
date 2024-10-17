@@ -12,17 +12,21 @@ import {
 } from "@nextui-org/modal";
 
 import CreatePostComponent from "../../post/CreatePostComponent";
+import { useUser } from "@/src/context/user.provider";
+import Loading from "../Loading";
 
 export default function CreatePostModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { user, isLoading } = useUser()
 
   return (
     <>
+      {isLoading && <Loading />}
       <Button
         className="p-6 rounded-lg flex gap-3 items-center bg-transparent"
         onPress={onOpen}
       >
-        <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+        <Avatar src={user?.profileImage} />
         <Input
           labelPlacement="outside"
           placeholder="Share your knowledge"

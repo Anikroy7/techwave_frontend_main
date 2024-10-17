@@ -19,9 +19,9 @@ export default function Comments({ post }: { post: TPost }) {
   const { mutate: handleCreateComment, isSuccess, data } = useCreateComment();
   const [newComment, setNewComment] = useState("");
   const { user, isLoading } = useUser();
-
   // State to manage comments locally
   const [comments, setComments] = useState<TComment[]>(post.comments);
+  console.log(comments)
 
   const handlePostComment = () => {
     const commentData = {

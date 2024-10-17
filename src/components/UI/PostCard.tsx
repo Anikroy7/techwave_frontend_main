@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import React, { useEffect, useState } from "react";
-import { AiFillLike, AiFillDislike, AiOutlineComment, AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import { AiFillLike, AiFillDislike, AiOutlineComment, AiOutlineLike, AiOutlineDislike, AiOutlineEye } from "react-icons/ai";
 import { FiCheckCircle } from 'react-icons/fi';
 import Comments from "../post/Comments";
 import { TPost } from "@/src/types";
@@ -13,6 +13,10 @@ import { useUpdatePostVote } from "@/src/hooks/post.hook";
 import useDebounce from "@/src/hooks/debounce.hook";
 import { useUser } from "@/src/context/user.provider";
 import PostDropdown from "../post/PostDropdown";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Chip } from "@nextui-org/chip";
+import { CheckIcon } from "@/src/assets/icons";
 
 const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
 
@@ -21,7 +25,9 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
   const { mutate: handlePostVote } = useUpdatePostVote();
   const debouncedUpvote = useDebounce(upvote.length, 2000);
   const debouncedDownvote = useDebounce(downvote.length, 2000);
-  const { user } = useUser()
+  const router = useRouter()
+  const { user } = useUser();
+
   const handleUpvoteCount = () => {
     if (upvote.includes(user?.userId as string)) {
       setUpvote([...upvote.filter(vote => vote !== user?.userId)])
@@ -46,9 +52,10 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
       handlePostVote({ postId: post._id, voteType: "down", votes: downvote });
     }
   }, [debouncedUpvote, debouncedDownvote])
-  console.log(post.user.followers, user?.userId)
+
   return (
-    <Card className="my-4 w-full shadow-lg">
+
+    <Card className="my-4 w-full shadow-lg cursor-pointer " >
       <div className="flex p-4">
         <Avatar
           alt={post.user.name}
@@ -59,7 +66,14 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
         <div className="flex-grow">
           <div className="flex gap-3 items-center">
             <p className="font-bold">{post.user.name}</p>
-            {post.user.following.includes(user?.userId as string) && <div className="flex items-center text-blue-500">
+            {post.user.isVerified && <Chip
+              startContent={<CheckIcon size={18} />}
+              variant="faded"
+              color="primary"
+            >
+              Verified
+            </Chip>}
+            {post.user.followers.includes(user?.userId as string) && <div className="flex items-center text-blue-500">
               <FiCheckCircle className="text-xl mr-2" />
               <p className="text-base">
                 following
@@ -126,13 +140,17 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
               {downvote.length}
             </Button>
           )}
+          <Button onClick={()=>router.push(`/post/${post._id}`)} isIconOnly color="warning" variant="faded" aria-label="See Details">
+            <AiOutlineEye className="h-5 w-5" />
+          </Button>
         </div>
         <Button startContent={<AiOutlineComment />}>
           {/* {post.comments.length} Comments */}
           {<Comments post={post} />}
         </Button>
       </div>
-    </Card>
+    </Card >
+
   );
 };
 

@@ -67,7 +67,7 @@ export default function PostDropdown({ userId, post }: { userId: string, post: T
                 </DropdownItem>
                 <DropdownItem
                     key="follow"
-                    className={`${(user?.userId === userId || post.user.following.includes(user?.userId as string)) ? 'hidden' : ""} text-primary`}
+                    className={`${(user?.userId === userId || post.user.followers.includes(user?.userId as string)) ? 'hidden' : ""} text-primary`}
                     onClick={() => handleAddFollow()}
                     color="primary"
                     description="Follow this user"
@@ -78,7 +78,7 @@ export default function PostDropdown({ userId, post }: { userId: string, post: T
                 <DropdownItem
                     key="unfollow"
                     onClick={() => handleUnFollow()}
-                    className={`${(user?.userId === userId || !post.user.following.includes(user?.userId as string)) ? 'hidden' : ""} text-danger`}
+                    className={`${(user?.userId === userId || !post.user.followers.includes(user?.userId as string)) ? 'hidden' : ""} text-danger`}
                     color="danger"
                     description="Unfollow this user"
                     startContent={<AiOutlineUserDelete className="text-3xl" />}

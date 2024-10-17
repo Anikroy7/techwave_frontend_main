@@ -11,14 +11,13 @@ import {
 import { getCurrentUser } from "../services/authService";
 
 type IUser = {
+  _id?: string;
   userId: string;
   email: string;
   role: string;
   profileImage: string;
   name: string;
-  followers?: IUser[];
-  following?: IUser[];
-  posts?: string[];
+  isVerified: boolean;
   phone: string;
   address: string;
 };
@@ -49,13 +48,13 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      {!isLoading && (
-        <UserContext.Provider
-          value={{ user, setUser, isLoading, setIsLoading }}
-        >
-          {children}
-        </UserContext.Provider>
-      )}
+
+      <UserContext.Provider
+        value={{ user, setUser, isLoading, setIsLoading }}
+      >
+        {children}
+      </UserContext.Provider>
+
     </>
   );
 };

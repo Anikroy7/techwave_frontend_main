@@ -27,7 +27,7 @@ export const signupUser = async (userData: FieldValues) => {
 };
 
 export const loginUser = async (userData: FieldValues) => {
-  const url = `https://techwave-backend-six.vercel.app/api/auth/signin`;
+  const url = `http://localhost:5000/api/auth/signin`;
 
   try {
     const res = await fetch(url, {
@@ -110,9 +110,7 @@ export const getCurrentUser = async () => {
       role: decodedToken.role,
       profileImage: decodedToken.profileImage,
       name: decodedToken.name,
-      followers: decodedToken.followers,
-      following: decodedToken.following,
-      posts: decodedToken.posts,
+      isVerified: decodedToken.isVerified,
       phone: decodedToken.phone,
       address: decodedToken.address,
     };
