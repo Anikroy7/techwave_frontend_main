@@ -7,29 +7,42 @@ import TWInput from "../form/TWInput";
 import { useUser } from "@/src/context/user.provider";
 import Loading from "../Loading";
 import { Input } from "@nextui-org/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import paymentValidationSchema from "@/src/schemas/payment.schema";
 import { DateRangePicker } from "@nextui-org/date-picker";
 import { parseDate } from "@internationalized/date";
 import { addDays, lightFormat } from "date-fns";
-type FormInput = {
-    email: string
-}
+import { useCreateOrder } from "@/src/hooks/order.hook";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 
 const PaymentConfirmation = () => {
-    const { user, isLoading } = useUser();
-    const lastDate = addDays(new Date(), 30)
-    const endDate = lightFormat(new Date(lastDate), 'yyyy-MM-dd')
-    const startDate = lightFormat(new Date(), 'yyyy-MM-dd')
-    console.log()
-    const onSubmit = (data: FormInput) => {
-        console.log(data)
+    const { user, isLoading,setIsLoading } = useUser();
+    const lastDate = addDays(new Date(), 30);
+    const endDate = lightFormat(new Date(lastDate), 'yyyy-MM-dd');
+    const startDate = lightFormat(new Date(), 'yyyy-MM-dd');
+    const router = useRouter()
+    const { mutate: handleCreateOrder, data, isPending, isSuccess } = useCreateOrder()
+    const onSubmit = () => {
+        const orderData = {
+            user: user?.userId,
+            totalPrice: 20,
+            startDate,
+            endDate
+        }
+        handleCreateOrder(orderData)
     }
+
+    useEffect(() => {
+        if (!isPending && isSuccess && data?.success) {
+            router.push(data?.data);
+            setIsLoading(true)
+        }
+    }, [isPending, isSuccess]);
 
     if (isLoading) return <p></p>
     return (
         <div className="flex justify-center items-center min-h-screen p-4">
-            {isLoading && <Loading />}
+            {isLoading || isPending && <Loading />}
             <Card className="w-full max-w-lg p-8">
                 <h2 className="text-2xl font-semibold mb-4 text-center ">
                     Payment Confirmation
@@ -46,11 +59,10 @@ const PaymentConfirmation = () => {
                         address: user?.address,
 
                     }}
-                    resolver={zodResolver(paymentValidationSchema)}
                     onSubmit={onSubmit}
                 >
                     <div className="my-3">
-                        <TWInput label="Name" name="name" type="text" />
+                        <TWInput disabled={true} label="Name" name="name" type="text" />
                     </div>
                     <div className="my-3 w-full">
                         <Input
@@ -62,10 +74,10 @@ const PaymentConfirmation = () => {
                         />
                     </div>
                     <div className="my-3">
-                        <TWInput label="Address" name="address" type="address" />
+                        <TWInput disabled={true} label="Address" name="address" type="address" />
                     </div>
                     <div className="my-3">
-                        <TWInput label="Phone" name="phone" type="text" />
+                        <TWInput disabled={true} label="Phone" name="phone" type="text" />
                     </div>
                     <div className="my-3">
                         <DateRangePicker

@@ -32,7 +32,6 @@ export const useCreatePost = () => {
       }
     },
     onError: (error) => {
-      // console.log(error)
       toast.error(error.message);
     },
   });

@@ -32,7 +32,6 @@ const SignupPage = () => {
   } = useSignupUser();
   const router = useRouter();
   const onSubmit = (data: FormInput) => {
-    // delete data.confirmPassword;
     const postData = {
       ...data,
       profileImage: defalutImage,

@@ -14,6 +14,7 @@ export default function TWInput({
   type = "text",
   label,
   name,
+  disabled=false
 }: IProps) {
   const {
     register,
@@ -32,6 +33,7 @@ export default function TWInput({
       size={size}
       type={type}
       variant={variant}
+      isDisabled={disabled}
     />
   );
 }

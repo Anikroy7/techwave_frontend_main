@@ -39,7 +39,6 @@ export const Navbar = () => {
     logout();
     router.push("/login");
   };
-  console.log('navbar', user)
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
@@ -78,7 +77,7 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <ThemeSwitch />
+          <ThemeSwitch /> 
         </NavbarItem>
         <NavbarItem className="hidden sm:flex gap-2">
           {user?.isVerified ? <Chip
