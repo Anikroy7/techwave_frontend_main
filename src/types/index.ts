@@ -60,3 +60,13 @@ export type TPost = {
   createdAt:string;
   isDeleted: boolean;
 };
+
+
+export type TOrder = {
+  user: TUser;
+  paymentStatus: 'Pending' | 'Paid' | 'Failed';
+  transactionId: string;
+  totalPrice: number;
+  startDate: string;
+  endDate: string;
+};

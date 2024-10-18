@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
-import { createOrder, getMyOrder, getSingleOrder } from "../services/orderService";
+import { createOrder, getAllOrders, getMyOrder, getSingleOrder } from "../services/orderService";
 import { toast } from "sonner";
 
 export const useCreateOrder = () => {
@@ -62,5 +62,11 @@ export const useGetSingleOrder = (orderId: string) => {
     return useQuery({
         queryKey: ["GET_SINGLE_ORDER"],
         queryFn: async () => await getSingleOrder(orderId),
+    });
+};
+export const useGetAllOrders = () => {
+    return useQuery({
+        queryKey: ["GET_ALL_ORDERS"],
+        queryFn: async () => await getAllOrders(),
     });
 };

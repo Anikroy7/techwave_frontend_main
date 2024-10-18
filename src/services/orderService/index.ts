@@ -26,6 +26,10 @@ export const getSingleOrder = async (id: string) => {
     const res = await fetch(`http://localhost:5000/api/orders/my-order/${id}`);
     return await res.json();
 };
+export const getAllOrders = async () => {
+    const res = await fetch(`http://localhost:5000/api/orders`);
+    return await res.json();
+};
 
 
 export const getMyOrder = async (userInfo: { userId: string }) => {

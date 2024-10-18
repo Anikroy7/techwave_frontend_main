@@ -29,12 +29,12 @@ export const adminMenuItems = [
         icon: <FaUsers className="h-5 w-5" />
     },
     {
-        path: '/admin/manage-posts',
+        path: 'manage-posts',
         label: 'Manage Posts',
         icon: <FaPen className="h-5 w-5" />
     },
     {
-        path: '/admin/manage-payments',
+        path: 'manage-payments',
         label: 'Manage Payments',
         icon: <FaCreditCard className="h-5 w-5" />
     },
