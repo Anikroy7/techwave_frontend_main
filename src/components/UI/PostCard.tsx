@@ -14,7 +14,6 @@ import useDebounce from "@/src/hooks/debounce.hook";
 import { useUser } from "@/src/context/user.provider";
 import PostDropdown from "../post/PostDropdown";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Chip } from "@nextui-org/chip";
 import { CheckIcon } from "@/src/assets/icons";
 

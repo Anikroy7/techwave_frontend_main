@@ -11,7 +11,7 @@ export const updateFollowers = async (
     }
 ) => {
 
-    const url = `https://techwave-backend-six.vercel.app/api/users/${followData.type}-followers`;
+    const url = `http://localhost:5000/api/users/${followData.type}-followers`;
     delete followData.type
     const refreshToken = cookies().get("refreshToken");
 
@@ -25,7 +25,7 @@ export const updateFollowers = async (
         });
         const result = await res.json();
         if (result.message) {
-            const res = await fetch("https://techwave-backend-six.vercel.app/api/auth/refresh-token", {
+            const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
                 method: "POST",
                 credentials: "include",
                 headers: {
@@ -50,7 +50,7 @@ export const updateFollowers = async (
 
 export const getMyInfo = async () => {
     // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-    const url = `https://techwave-backend-six.vercel.app/api/users/me`;
+    const url = `http://localhost:5000/api/users/me`;
     const accessToken = cookies().get("accessToken")?.value;
 
     try {

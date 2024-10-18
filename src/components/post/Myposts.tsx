@@ -7,9 +7,8 @@ import { TPost } from "@/src/types";
 
 const Myposts = () => {
   const { user, isLoading } = useUser();
-  const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
-
   if (isLoading) return <Loading />;
+  const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
 
   return (
     <>
@@ -18,7 +17,7 @@ const Myposts = () => {
         {data?.data?.length > 0 ?
           data?.data?.map((post: TPost) => (
             <PostCard key={post._id} post={post} />
-          )):"No posts available..."}
+          )) : "No posts available..."}
       </section>
     </>
   );

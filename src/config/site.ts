@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + NextUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Techwave",
+  description: `The "Tech Tips & Tricks" project is a dynamic full-stack web application designed to help tech enthusiasts navigate and master the ever-evolving world of technology.`,
   navItems: [
     {
       label: "News Feed",
@@ -16,6 +16,10 @@ export const siteConfig = {
     {
       label: "About us",
       href: "/about",
+    },
+    {
+      label: "Dashbaord",
+      href: "/dashboard",
     },
   ],
   navMenuItems: [
