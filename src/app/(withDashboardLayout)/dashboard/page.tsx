@@ -1,8 +1,11 @@
+import AdminDashboard from "@/src/components/dashboard/admin/AdminDashboard";
 
-const AdminDashboard = () => {
+const Dashboard = () => {
     return (
-        <h2>adf</h2>
+        <>
+            <AdminDashboard />
+        </>
     );
 };
 
-export default AdminDashboard;
+export default Dashboard;

@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 import { getCurrentUser } from "./services/authService";
-import { getMyOrder } from "./services/orderService";
 
 const AuthRoutes = ["/login", "/signup"];
 
@@ -35,11 +34,9 @@ export async function middleware(request: NextRequest) {
       }
     }
 
-    // return NextResponse.redirect(new URL("/", request.url));
     return NextResponse.next();
   }
 
-  // See "Matching Paths" below to learn more
   export const config = {
     matcher: ["/", "/login", "/signup", "/pricing", "/admin/:page*", '/payment/successfull'],
   };
