@@ -21,14 +21,15 @@ export default function PostDetailsModal({ post }: { post: TPost }) {
     createdAt,
   } = post;
   const startDate = lightFormat(new Date(createdAt), 'yyyy-MM-dd');
-  console.log(createdAt)
+  // console.log(createdAt)
   return (
     <>
       <Button isIconOnly className="bg-transparent" onPress={onOpen}> <Tooltip content="Details">
         <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
           <EyeIcon />
         </span>
-      </Tooltip></Button>
+      </Tooltip>
+      </Button>
       <Modal size={"4xl"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent >
           {(onClose) => (

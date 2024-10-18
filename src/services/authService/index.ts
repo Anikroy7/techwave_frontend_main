@@ -89,6 +89,28 @@ export const updateUser = async (userData: FieldValues) => {
     throw new Error(error);
   }
 };
+export const updateSingleUser = async (
+  userId: string,
+  userData: FieldValues
+) => {
+console.log('upaet user',userId, userData)
+  const url = `http://localhost:5000/api/users/${userId}`;
+
+  try {
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    const result = await res.json();
+
+    return result;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
 
 export const logout = () => {
   cookies().delete("accessToken");

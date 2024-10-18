@@ -18,4 +18,3 @@ const signupValidationSchema = z
     path: ["confirmPassword"],
   });
 
-export default signupValidationSchema;

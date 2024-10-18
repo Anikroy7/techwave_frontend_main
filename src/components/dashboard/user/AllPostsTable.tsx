@@ -17,7 +17,6 @@ export default function AllPostsTable() {
     const { mutate: handlePostDelete } = useDeletePost();
 
     const handleDeletePostButton = (postId: string) => {
-        console.log(postId)
         handlePostDelete({ postId })
     }
 
@@ -49,11 +48,13 @@ export default function AllPostsTable() {
                                                 <EditIcon />
                                             </span>
                                         </Tooltip> */}
-                                        <Button isIconOnly className="bg-transparent" onClick={() => handleDeletePostButton(post._id)}> <Tooltip color="danger" content="Delete user">
-                                            <span className="text-lg text-danger-400 cursor-pointer active:opacity-50">
-                                                <DeleteIcon />
-                                            </span>
-                                        </Tooltip></Button>
+                                        <Button isIconOnly className="bg-transparent" onClick={() => handleDeletePostButton(post._id)}>
+                                            <Tooltip color="danger" content="Delete user">
+                                                <span className="text-lg text-danger-400 cursor-pointer active:opacity-50">
+                                                    <DeleteIcon />
+                                                </span>
+                                            </Tooltip>
+                                        </Button>
 
                                     </div>
                                 </TableCell>
