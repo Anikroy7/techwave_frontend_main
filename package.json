@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
 		"@internationalized/date": "^3.5.6",
+		"@nextui-org/accordion": "^2.0.40",
 		"@nextui-org/avatar": "^2.0.33",
 		"@nextui-org/badge": "^2.0.32",
 		"@nextui-org/button": "2.0.38",

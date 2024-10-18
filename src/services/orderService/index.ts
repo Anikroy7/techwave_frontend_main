@@ -22,6 +22,11 @@ export const createOrder = async (orderData: FieldValues) => {
     }
 };
 
+export const getSingleOrder = async (id: string) => {
+    const res = await fetch(`http://localhost:5000/api/orders/my-order/${id}`);
+    return await res.json();
+};
+
 
 export const getMyOrder = async (userInfo: { userId: string }) => {
     const url = `http://localhost:5000/api/orders/my-order`;
@@ -29,7 +34,7 @@ export const getMyOrder = async (userInfo: { userId: string }) => {
     const refreshToken = cookies().get("refreshToken")
     console.log(userInfo)
     const dta = {
-        userId:userInfo.userId
+        userId: userInfo.userId
     }
     try {
         const res = await fetch(url, {

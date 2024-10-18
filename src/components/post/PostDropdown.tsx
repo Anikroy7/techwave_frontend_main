@@ -7,6 +7,7 @@ import { TPost } from "@/src/types";
 import { Button } from "@nextui-org/button";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 import { cn } from "@nextui-org/theme";
+import { useRouter } from "next/navigation";
 import { AiOutlineEllipsis, AiOutlineUserAdd, AiOutlineUserDelete } from 'react-icons/ai';
 
 
@@ -14,7 +15,8 @@ export default function PostDropdown({ userId, post }: { userId: string, post: T
     const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0";
     const { user } = useUser();
     const { mutate: handlePostDelete } = useDeletePost();
-    const { mutate: handleUpdateFollowers } = useUpdateFollowers()
+    const { mutate: handleUpdateFollowers } = useUpdateFollowers();
+    const router = useRouter()
     const handleDeletePost = () => {
         handlePostDelete({ postId: post._id })
     }
@@ -47,6 +49,7 @@ export default function PostDropdown({ userId, post }: { userId: string, post: T
             <DropdownMenu variant="faded" aria-label="Dropdown menu with description">
 
                 <DropdownItem
+                    onClick={()=> router.push('/dashboard/my-posts')}
                     key="edit"
                     className={`${user?.userId !== userId ? 'hidden' : ""}`}
                     description="Allows you to edit the post"

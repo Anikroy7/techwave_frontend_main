@@ -10,17 +10,18 @@ import Image from 'next/image';
 const Sidebar = () => {
     const { user, isLoading } = useUser();
     const paths = window.location.pathname.split('/')
-    console.log(paths);
     return (
         <div className="flex flex-col w-64 h-screen shadow-lg">
             {isLoading && <Loading />}
             <div className="flex items-center justify-center h-16 ">
-                <Image
-                    alt=""
-                    height={100}
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo9lsguElms4_3HsOiZYnDQjQc8iRPxN7-Qw&s"
-                    width={100}
-                />
+                <Link href={'/'}>
+                    <Image
+                        alt=""
+                        height={100}
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo9lsguElms4_3HsOiZYnDQjQc8iRPxN7-Qw&s"
+                        width={100}
+                    />
+                </Link>
             </div>
             <nav className="flex-1 mt-4">
                 <ul className="space-y-2">

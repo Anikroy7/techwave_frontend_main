@@ -2,15 +2,24 @@
 import { useUser } from "@/src/context/user.provider";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/table";
 import Loading from "../../UI/Loading";
-import { useGetMyposts } from "@/src/hooks/post.hook";
+import { useDeletePost, useGetMyposts } from "@/src/hooks/post.hook";
 import { TPost } from "@/src/types";
 import { Tooltip } from "@nextui-org/tooltip";
-import { DeleteIcon, EditIcon, EyeIcon } from "@/src/assets/icons";
+import { DeleteIcon } from "@/src/assets/icons";
+import PostDetailsModal from "./PostDetailsModal";
+
+import { Button } from "@nextui-org/button";
 
 export default function AllPostsTable() {
     const { user, isLoading } = useUser();
     if (isLoading) return <Loading />;
     const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
+    const { mutate: handlePostDelete } = useDeletePost();
+
+    const handleDeletePostButton = (postId: string) => {
+        console.log(postId)
+        handlePostDelete({ postId })
+    }
 
     return (
         <>
@@ -33,26 +42,24 @@ export default function AllPostsTable() {
                                 <TableCell>{post.category}</TableCell>
                                 <TableCell>
                                     <div className="relative flex items-center gap-2">
-                                        <Tooltip content="Details">
-                                            <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                                                <EyeIcon />
-                                            </span>
-                                        </Tooltip>
-                                        <Tooltip content="Edit user">
+                                        <PostDetailsModal post={post} />
+
+                                        {/* <Tooltip content="Edit user">
                                             <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                                                 <EditIcon />
                                             </span>
-                                        </Tooltip>
-                                        <Tooltip color="danger" content="Delete user">
-                                            <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                                        </Tooltip> */}
+                                       <Button isIconOnly className="bg-transparent" onClick={()=>handleDeletePostButton(post._id)}> <Tooltip color="danger" content="Delete user">
+                                            <span className="text-lg text-danger-400 cursor-pointer active:opacity-50">
                                                 <DeleteIcon />
                                             </span>
-                                        </Tooltip>
+                                        </Tooltip></Button>
+                                       
                                     </div>
                                 </TableCell>
                             </TableRow>)
                         }
-                    </TableBody> : <TableBody emptyContent={"No post found to display."}>{[]}</TableBody>
+                    </TableBody> : <TableBody emptyContent={"No post to display."}>{[]}</TableBody>
 
                 }
 

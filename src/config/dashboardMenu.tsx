@@ -18,12 +18,12 @@ export const userMenuItems = [
         icon: <FaEdit className="h-5 w-5" />,
     },
     {
-        path: 'following',
+        path: 'following-activity',
         label: 'Following Activity',
         icon: <FaList className="h-5 w-5" />,
     },
     {
-        path: 'payments',
+        path: 'payment-details',
         label: 'Payments',
         icon: <FaCreditCard className="h-5 w-5" />,
     },
