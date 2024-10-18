@@ -8,7 +8,7 @@ const AdminDashboard = () => {
 
       {/* Top section with analytics summary */}
       <div className="flex flex-col md:flex-row justify-between gap-4 mb-8">
-        <Card className="bg-gray-800 p-4 flex-1">
+        <Card className=" p-4 flex-1">
           <div className="flex items-center">
             <FaRegEye className="text-3xl mr-3" />
             <div>
@@ -18,7 +18,7 @@ const AdminDashboard = () => {
           </div>
         </Card>
 
-        <Card className="bg-gray-800 p-4 flex-1">
+        <Card className=" p-4 flex-1">
           <div className="flex items-center">
             <FaRegThumbsUp className="text-3xl mr-3" />
             <div>
@@ -28,7 +28,7 @@ const AdminDashboard = () => {
           </div>
         </Card>
 
-        <Card className="bg-gray-800 p-4 flex-1">
+        <Card className=" p-4 flex-1">
           <div className="flex items-center">
             <FaRegCommentDots className="text-3xl mr-3" />
             <div>
@@ -42,19 +42,19 @@ const AdminDashboard = () => {
       {/* Graph sections */}
       <div className="flex flex-col md:flex-row gap-4">
         {/* Readers Summary */}
-        <Card className="bg-gray-800 p-4 flex-1">
+        <Card className=" p-4 flex-1">
           <h3 className="text-lg font-bold mb-4">Readers Summary</h3>
           <div className="bg-purple-500 h-48 rounded-md"></div>
         </Card>
 
         {/* Reactions Summary */}
-        <Card className="bg-gray-800 p-4 flex-1">
+        <Card className=" p-4 flex-1">
           <h3 className="text-lg font-bold mb-4">Reactions Summary</h3>
           <div className="bg-cyan-500 h-48 rounded-md"></div>
         </Card>
 
         {/* Comments Summary */}
-        <Card className="bg-gray-800 p-4 flex-1">
+        <Card className=" p-4 flex-1">
           <h3 className="text-lg font-bold mb-4">Comments Summary</h3>
           <div className="bg-teal-500 h-48 rounded-md"></div>
         </Card>

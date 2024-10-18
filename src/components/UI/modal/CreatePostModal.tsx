@@ -19,6 +19,7 @@ export default function CreatePostModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user, isLoading } = useUser()
 
+  if (user?.role) return <> </>
   return (
     <>
       {isLoading && <Loading />}

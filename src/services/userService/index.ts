@@ -2,6 +2,7 @@
 
 
 import { cookies } from "next/headers";
+import { FieldValues } from "react-hook-form";
 
 export const updateFollowers = async (
     followData: {
@@ -66,3 +67,34 @@ export const getMyInfo = async () => {
         throw new Error(error);
     }
 };
+
+
+export const getAllUsers = async () => {
+    const res = await fetch(`http://localhost:5000/api/users`);
+
+    return await res.json();
+};
+
+
+/* export const updateUser = async (
+    userData: FieldValues
+) => {
+
+    const url = `http://localhost:5000/api/users/me`;
+    const accessToken = cookies().get('accessToken');
+    try {
+        const res = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': `Bearer ${accessToken?.value}`
+            },
+            body: JSON.stringify(userData),
+        });
+        const result = await res.json();
+
+        return result;
+    } catch (error: any) {
+        throw new Error(error);
+    }
+}; */

@@ -22,7 +22,7 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Avatar } from "@nextui-org/avatar";
-import {  AiFillLock } from 'react-icons/ai';
+import { AiFillLock } from 'react-icons/ai';
 import Loading from "./Loading";
 import { useUser } from "@/src/context/user.provider";
 import { ThemeSwitch } from "@/src/components/UI/theme-switch";
@@ -77,9 +77,9 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <ThemeSwitch /> 
+          <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex gap-2">
+        {user?.role !== 'admin' && <NavbarItem className="hidden sm:flex gap-2">
           {user?.isVerified ? <Chip
             variant="shadow"
             startContent={<CheckIcon size={18} />}
@@ -98,7 +98,7 @@ export const Navbar = () => {
             Try Premium
           </Button>}
 
-        </NavbarItem>
+        </NavbarItem>}
       </NavbarContent>
       <div>
         <NavbarContent className="sm:hidden basis-1 pl-4">

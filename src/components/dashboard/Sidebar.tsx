@@ -34,7 +34,7 @@ const Sidebar = () => {
                     {
                         user?.role === 'admin' ? adminMenuItems.map((item, index) => (
                             <li key={index}>
-                                <Link href={`/dashboard/${item.path}`} className="flex items-center px-4 py-2 hover:bg-gray-700 ${paths.length===2&&'bg-slate-700'} transition-colors">
+                                <Link href={`/dashboard/admin/${item.path}`} className="flex items-center px-4 py-2 hover:bg-gray-700 ${paths.length===2&&'bg-slate-700'} transition-colors">
                                     {item.icon}
                                     <span className="ml-2">{item.label}</span>
                                 </Link>

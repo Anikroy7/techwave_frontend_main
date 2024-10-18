@@ -4,11 +4,7 @@ import CreatePostModal from "@/src/components/UI/modal/CreatePostModal";
 
 
 export default function Feed() {
-    // const { isLoading } = useUser();
-
-    
-
-    // if (isLoading) return <Loading />;
+  
   return (
     <section className="min-h-screen">
       {/* Container */}

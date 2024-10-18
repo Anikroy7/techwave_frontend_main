@@ -1,17 +1,8 @@
 
-import { FaUser, FaChartLine, FaEdit, FaCreditCard, FaUsers, FaPen, FaList } from 'react-icons/fa';
+import {  FaEdit, FaCreditCard, FaUsers, FaPen, FaList } from 'react-icons/fa';
 
 export const userMenuItems = [
-    // {
-    //     path: '/dashboard/profile',
-    //     label: 'Profile',
-    //     icon: <FaUser className="h-5 w-5" />,
-    // },
-    // {
-    //     path: '/dashboard/analytics',
-    //     label: 'Analytics',
-    //     icon: <FaChartLine className="h-5 w-5" />,
-    // },
+
     {
         path: 'my-posts',
         label: 'My Posts',
@@ -33,7 +24,7 @@ export const userMenuItems = [
 
 export const adminMenuItems = [
     {
-        path: '/admin/manage-users',
+        path: 'manage-users',
         label: 'Manage Users',
         icon: <FaUsers className="h-5 w-5" />
     },

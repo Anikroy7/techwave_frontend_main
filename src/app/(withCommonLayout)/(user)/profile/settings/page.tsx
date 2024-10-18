@@ -15,7 +15,7 @@ import { CheckIcon } from "@/src/assets/icons";
 
 const Settings = () => {
   const { data: myData, isPending: myInfoPending } = userGetMyInfo()
-  console.log(myData)
+
   return (
     <main className="bg-default bg-opacity-25">
       {myInfoPending && <Loading />}
@@ -35,7 +35,7 @@ const Settings = () => {
               <h2 className="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
                 {myData?.data?.name}
               </h2>
-              {myData?.data?.isVerified && <Chip
+              {myData?.data?.isVerified&&<Chip
                 startContent={<CheckIcon size={18} />}
                 variant="faded"
                 color="primary"

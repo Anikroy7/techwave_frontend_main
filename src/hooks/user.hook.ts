@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getMyInfo, updateFollowers } from "../services/userService";
+import { getAllUsers, getMyInfo, updateFollowers } from "../services/userService";
 import { toast } from "sonner";
 import { queryClient } from "../lib/Providers";
+import { FieldValues } from "react-hook-form";
 
 export const useUpdateFollowers = () => {
     return useMutation<
@@ -43,3 +44,37 @@ export const userGetMyInfo = () => {
         queryFn: async () => await getMyInfo(),
     });
 }
+
+export const userGetAllUsers = () => {
+    return useQuery({
+        queryKey: ["GET_ALL_USERS"],
+        queryFn: async () => await getAllUsers(),
+    });
+}
+/* 
+export const useUpdateUser = () => {
+    return useMutation<any, Error, FieldValues>({
+      mutationKey: ["UPDATE_POST"],
+  
+      mutationFn: async ({ postData}) =>
+        await updatePost(postData),
+      onSuccess: (data) => {
+        if (data) {
+          if (data.success) {
+            // toast.success(data.message);
+          }
+          if (!data.success) {
+            data.errorSources.map((e: { message: string }, index: number) =>
+              toast.error(e.message, { id: `error-${index}` }),
+            );
+          }
+        } else {
+          toast.error("Something went wrong");
+        }
+      },
+      onError: (error) => {
+        // console.log(error)
+        toast.error(error.message);
+      },
+    });
+  }; */
