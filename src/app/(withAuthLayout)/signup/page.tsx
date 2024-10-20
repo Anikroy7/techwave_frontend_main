@@ -92,17 +92,6 @@ const SignupPage = () => {
             <div className="my-3">
               <TWInput label="Phone" name="phone" type="text" />
             </div>
-            {/* <div className="my-3">
-                            <TWDatePicker
-                            label="Date of birth"
-                            name="dateOfBirth"
-                            />
-                            <DatePicker
-                                errorMessage={!value ? "Please give your date." : ""}
-                                isInvalid={!value ? true : false}
-                                variant="bordered" className="min-w-full sm:min-w-[225px]" label="Date of birth" value={value} onChange={setValue} />
-
-                        </div> */}
             <div className="my-3">
               <TWInput label="Password" name="password" type="password" />
             </div>

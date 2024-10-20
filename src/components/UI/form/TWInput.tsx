@@ -14,10 +14,12 @@ export default function TWInput({
   type = "text",
   label,
   name,
-  disabled=false
+  disabled=false,
+  placeholder = ''
 }: IProps) {
   const {
     register,
+  
     formState: { errors },
   } = useFormContext();
 
@@ -34,6 +36,7 @@ export default function TWInput({
       type={type}
       variant={variant}
       isDisabled={disabled}
+      placeholder={placeholder}
     />
   );
 }

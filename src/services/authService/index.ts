@@ -93,7 +93,7 @@ export const updateSingleUser = async (
   userId: string,
   userData: FieldValues
 ) => {
-console.log('upaet user',userId, userData)
+  console.log('upaet user', userId, userData)
   const url = `http://localhost:5000/api/users/${userId}`;
 
   try {
@@ -142,3 +142,46 @@ export const getCurrentUser = async () => {
 };
 
 
+export const forgetPassword = async (userData: FieldValues) => {
+  // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
+  const url = `http://localhost:5000/api/auth/forget-password`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    const result = await res.json();
+
+    // const result = await fetch('https://jsonplaceholder.typicode.com/todos/')
+    return result;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const resetPassword = async (bodyData: FieldValues) => {
+  // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
+  const url = `http://localhost:5000/api/auth/reset-password`;
+  const { email, password, token } = bodyData
+  console.log('bodyData resete', bodyData,  email, password, token)
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ email, newPassword:password }),
+    });
+    const result = await res.json();
+
+    // const result = await fetch('https://jsonplaceholder.typicode.com/todos/')
+    return result;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};

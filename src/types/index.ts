@@ -12,6 +12,7 @@ export type IInput = {
   label: string;
   name: string;
   disabled?: boolean;
+  placeholder?: string
 };
 export type TUser = {
   _id:string;

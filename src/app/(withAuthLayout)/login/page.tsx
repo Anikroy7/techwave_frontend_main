@@ -74,9 +74,20 @@ const LoginPage = () => {
             <div className="my-3">
               <TWInput label="Email" name="email" type="email" />
             </div>
-            <div>
+            <div className="my-3">
               <TWInput label="Password" name="password" type="password" />
             </div>
+
+            {/* Forgot Password link */}
+            <div className="text-right">
+              <Link
+                href="/forgot-password"
+                className="text-sm text-default-500 hover:text-default-700"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+
             <Button
               className="my-3 w-full rounded-md bg-default-900 font-semibold text-default"
               size="lg"
@@ -85,54 +96,19 @@ const LoginPage = () => {
               Login
             </Button>
           </TWForm>
-          {/* <form className="space-y-6">
-            <div>
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-               
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
-              >
-                Log In
-              </button>
-            </div>
-            <div className="text-center">
-              <a href="#" className="text-blue-500 hover:underline">
-                Forgotten password?
-              </a>
-            </div>
-            <hr className="my-6" />
-            <div className="text-center">
-              <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">
-                Create New Account
-              </button>
-            </div>
-          </form> */}
+
           <hr className="my-6" />
           <div className="text-center">
-            <span className="mr-3">New to techwave?</span>{" "}
+            <span className="mr-3">New to techwave?</span>
             <Link
               className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
-              href={"/signup"}
+              href="/signup"
             >
               Create New Account
             </Link>
           </div>
         </div>
+
       </div>
     </div>
   );
