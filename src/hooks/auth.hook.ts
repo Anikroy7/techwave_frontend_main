@@ -2,7 +2,13 @@ import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
-import { forgetPassword, loginUser, resetPassword, signupUser, updateUser } from "../services/authService";
+import {
+  forgetPassword,
+  loginUser,
+  resetPassword,
+  signupUser,
+  updateUser,
+} from "../services/authService";
 
 export const useSignupUser = () => {
   return useMutation<any, Error, FieldValues>({
@@ -78,7 +84,6 @@ export const useLoginUser = () => {
   });
 };
 
-
 export const useForgetPassword = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["FORGET_PASSWORD"],
@@ -128,4 +133,3 @@ export const useResetPassword = () => {
     },
   });
 };
-

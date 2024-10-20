@@ -5,46 +5,54 @@ import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import React, { useEffect, useRef, useState } from "react";
-import { AiFillLike, AiFillDislike, AiOutlineComment, AiOutlineLike, AiOutlineDislike, AiOutlineEye, AiOutlineFilePdf } from "react-icons/ai";
-import { FiCheckCircle } from 'react-icons/fi';
+import {
+  AiFillLike,
+  AiFillDislike,
+  AiOutlineComment,
+  AiOutlineLike,
+  AiOutlineDislike,
+  AiOutlineEye,
+  AiOutlineFilePdf,
+} from "react-icons/ai";
+import { FiCheckCircle } from "react-icons/fi";
+import { useRouter } from "next/navigation";
+import { Chip } from "@nextui-org/chip";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
 import Comments from "../post/Comments";
+import PostDropdown from "../post/PostDropdown";
+
 import { TPost } from "@/src/types";
 import { useUpdatePostVote } from "@/src/hooks/post.hook";
 import useDebounce from "@/src/hooks/debounce.hook";
 import { useUser } from "@/src/context/user.provider";
-import PostDropdown from "../post/PostDropdown";
-import { useRouter } from "next/navigation";
-import { Chip } from "@nextui-org/chip";
 import { CheckIcon } from "@/src/assets/icons";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 
 const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
-
   const [upvote, setUpvote] = useState(post.upvote);
   const [downvote, setDownvote] = useState(post.downvote);
   const { mutate: handlePostVote } = useUpdatePostVote();
   const debouncedUpvote = useDebounce(upvote.length, 2000);
   const debouncedDownvote = useDebounce(downvote.length, 2000);
-  const router = useRouter()
+  const router = useRouter();
   const { user } = useUser();
-  const postcardPdf = useRef(null)
+  const postcardPdf = useRef(null);
 
   const handleUpvoteCount = () => {
     if (upvote.includes(user?.userId as string)) {
-      setUpvote([...upvote.filter(vote => vote !== user?.userId)])
+      setUpvote([...upvote.filter((vote) => vote !== user?.userId)]);
     } else {
-      setUpvote([...upvote, user?.userId as string])
+      setUpvote([...upvote, user?.userId as string]);
     }
   };
   const handleDownvoteCount = () => {
     if (downvote.includes(user?.userId as string)) {
-      setDownvote([...downvote.filter(vote => vote !== user?.userId)])
+      setDownvote([...downvote.filter((vote) => vote !== user?.userId)]);
     } else {
-      setDownvote([...downvote, user?.userId as string])
+      setDownvote([...downvote, user?.userId as string]);
     }
   };
-
 
   useEffect(() => {
     if (debouncedUpvote !== post.upvote.length) {
@@ -53,40 +61,37 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
     if (debouncedDownvote !== post.downvote.length) {
       handlePostVote({ postId: post._id, voteType: "down", votes: downvote });
     }
-  }, [debouncedUpvote, debouncedDownvote])
-
+  }, [debouncedUpvote, debouncedDownvote]);
 
   const handleGeneratePdf = async () => {
-    const inputData = postcardPdf.current
+    const inputData = postcardPdf.current;
+
     if (!inputData) {
-      console.error("Element not found!");
       return;
     }
     try {
       const canvas = await html2canvas(inputData);
-      const imgData = canvas.toDataURL('image/png');
+      const imgData = canvas.toDataURL("image/png");
 
       const pdf = new jsPDF({
         orientation: "landscape",
         unit: "in",
-        format: 'a4'
+        format: "a4",
       });
 
-      const width = pdf.internal.pageSize.getWidth()
-      const height = (canvas.height * width) / canvas.width
+      const width = pdf.internal.pageSize.getWidth();
+      const height = (canvas.height * width) / canvas.width;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-      pdf.save('postcard.pdf')
+      pdf.addImage(imgData, "PNG", 0, 0, width, height);
+      pdf.save("postcard.pdf");
     } catch (error) {
-      console.log(error)
+      throw new Error("postcard pdf");
     }
-  }
+  };
 
   return (
-
-    <Card className="my-4 w-full shadow-lg cursor-pointer " >
-
-      <div className="flex p-4" ref={postcardPdf}>
+    <Card className="my-4 w-full shadow-lg cursor-pointer ">
+      <div ref={postcardPdf} className="flex p-4">
         <Avatar
           alt={post.user.name}
           className="mr-4"
@@ -96,24 +101,26 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
         <div className="flex-grow">
           <div className="flex gap-3 items-center">
             <p className="font-bold">{post.user.name}</p>
-            {post.user.isVerified && <Chip
-              startContent={<CheckIcon size={18} />}
-              variant="faded"
-              color="primary"
-            >
-              Verified
-            </Chip>}
-            {post.user.followers.includes(user?.userId as string) && <div className="flex items-center text-blue-500">
-              <FiCheckCircle className="text-xl mr-2" />
-              <p className="text-base">
-                following
-              </p>
-            </div>}
+            {post.user.isVerified && (
+              <Chip
+                color="primary"
+                startContent={<CheckIcon size={18} />}
+                variant="faded"
+              >
+                Verified
+              </Chip>
+            )}
+            {post.user.followers.includes(user?.userId as string) && (
+              <div className="flex items-center text-blue-500">
+                <FiCheckCircle className="text-xl mr-2" />
+                <p className="text-base">following</p>
+              </div>
+            )}
           </div>
           <p className="text-gray-500">{post.category}</p>
         </div>
 
-        <PostDropdown userId={post.user._id} post={post} />
+        <PostDropdown post={post} userId={post.user._id} />
       </div>
       <Divider />
       <div className="p-4">
@@ -170,15 +177,21 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
               {downvote.length}
             </Button>
           )}
-          <Button onClick={() => router.push(`/post/${post._id}`)} isIconOnly color="warning" variant="faded" aria-label="See Details">
+          <Button
+            isIconOnly
+            aria-label="See Details"
+            color="warning"
+            variant="faded"
+            onClick={() => router.push(`/post/${post._id}`)}
+          >
             <AiOutlineEye />
           </Button>
           <Button
-            color="default"
             isIconOnly
+            color="default"
             onClick={() => handleGeneratePdf()}
           >
-            <AiOutlineFilePdf className="h-5 w-5"  />
+            <AiOutlineFilePdf className="h-5 w-5" />
           </Button>
         </div>
         <Button startContent={<AiOutlineComment />}>
@@ -186,8 +199,7 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
           {<Comments post={post} />}
         </Button>
       </div>
-    </Card >
-
+    </Card>
   );
 };
 

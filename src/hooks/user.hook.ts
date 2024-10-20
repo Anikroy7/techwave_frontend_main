@@ -1,27 +1,37 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getAllUsers, getMyInfo, updateFollowers } from "../services/userService";
 import { toast } from "sonner";
-import { queryClient } from "../lib/Providers";
 import { FieldValues } from "react-hook-form";
+
+import {
+  getAllUsers,
+  getMyInfo,
+  updateFollowers,
+} from "../services/userService";
+import { queryClient } from "../lib/Providers";
 import { updateSingleUser } from "../services/authService";
 
 export const useUpdateFollowers = () => {
   return useMutation<
     any,
     Error,
-    { followData: { userId: string; followingId: string; type: "add" | "delete"; } }
+    {
+      followData: {
+        userId: string;
+        followingId: string;
+        type: "add" | "delete";
+      };
+    }
   >({
     mutationKey: ["UPDATE_FOLLWERS"],
 
-    mutationFn: async ({ followData }) =>
-      await updateFollowers(followData),
+    mutationFn: async ({ followData }) => await updateFollowers(followData),
     onSuccess: (data) => {
       if (data) {
         if (data.success) {
           toast.success(data.message);
-          queryClient.invalidateQueries({ queryKey: ['GET_ALL_POSTS'] })
-          queryClient.invalidateQueries({ queryKey: ['GET_MY_POSTS'] })
-          queryClient.invalidateQueries({ queryKey: ['GET_MY_INFO'] })
+          queryClient.invalidateQueries({ queryKey: ["GET_ALL_POSTS"] });
+          queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
+          queryClient.invalidateQueries({ queryKey: ["GET_MY_INFO"] });
         }
         if (!data.success) {
           data.errorSources.map((e: { message: string }, index: number) =>
@@ -44,14 +54,14 @@ export const userGetMyInfo = () => {
     queryKey: ["GET_MY_INFO"],
     queryFn: async () => await getMyInfo(),
   });
-}
+};
 
 export const userGetAllUsers = () => {
   return useQuery({
     queryKey: ["GET_ALL_USERS"],
     queryFn: async () => await getAllUsers(),
   });
-}
+};
 
 export const useUpdateSingleUser = () => {
   return useMutation<any, Error, FieldValues>({
@@ -63,9 +73,8 @@ export const useUpdateSingleUser = () => {
       if (data) {
         if (data.success) {
           toast.success(data.message);
-          queryClient.invalidateQueries({ queryKey: ['GET_MY_INFO'] })
-          queryClient.invalidateQueries({ queryKey: ['GET_ALL_USERS'] })
-
+          queryClient.invalidateQueries({ queryKey: ["GET_MY_INFO"] });
+          queryClient.invalidateQueries({ queryKey: ["GET_ALL_USERS"] });
         }
         if (!data.success) {
           data.errorSources.map((e: { message: string }, index: number) =>

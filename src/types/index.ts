@@ -12,10 +12,10 @@ export type IInput = {
   label: string;
   name: string;
   disabled?: boolean;
-  placeholder?: string
+  placeholder?: string;
 };
 export type TUser = {
-  _id:string;
+  _id: string;
   name: string;
   email: string;
   password: string;
@@ -39,7 +39,6 @@ export type TComment = {
     _id: string;
     name: string;
     profileImage?: string;
-
   };
   post: string;
   isDeleted: boolean;
@@ -54,18 +53,20 @@ export type TPost = {
   upvote: string[];
   downvote: string[];
   user: {
-    _id: string; name: string; profileImage?: string, followers: string[]
-    following: string[],
-    isVerified:boolean
+    _id: string;
+    name: string;
+    profileImage?: string;
+    followers: string[];
+    following: string[];
+    isVerified: boolean;
   };
-  createdAt:string;
+  createdAt: string;
   isDeleted: boolean;
 };
 
-
 export type TOrder = {
   user: TUser;
-  paymentStatus: 'Pending' | 'Paid' | 'Failed';
+  paymentStatus: "Pending" | "Paid" | "Failed";
   transactionId: string;
   totalPrice: number;
   startDate: string;

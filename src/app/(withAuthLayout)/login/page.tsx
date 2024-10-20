@@ -81,8 +81,8 @@ const LoginPage = () => {
             {/* Forgot Password link */}
             <div className="text-right">
               <Link
-                href="/forgot-password"
                 className="text-sm text-default-500 hover:text-default-700"
+                href="/forgot-password"
               >
                 Forgot Password?
               </Link>
@@ -108,7 +108,6 @@ const LoginPage = () => {
             </Link>
           </div>
         </div>
-
       </div>
     </div>
   );

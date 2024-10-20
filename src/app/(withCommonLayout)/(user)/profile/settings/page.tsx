@@ -3,18 +3,17 @@
 import { Tabs, Tab } from "@nextui-org/tabs";
 import { Card, CardBody } from "@nextui-org/card";
 import Link from "next/link";
+import { Chip } from "@nextui-org/chip";
 
-import { useUser } from "@/src/context/user.provider";
 import Loading from "@/src/components/UI/Loading";
 import Myposts from "@/src/components/post/Myposts";
 import Followers from "@/src/components/UI/Follwers";
 import Following from "@/src/components/UI/Following";
 import { userGetMyInfo } from "@/src/hooks/user.hook";
-import { Chip } from "@nextui-org/chip";
 import { CheckIcon } from "@/src/assets/icons";
 
 const Settings = () => {
-  const { data: myData, isPending: myInfoPending } = userGetMyInfo()
+  const { data: myData, isPending: myInfoPending } = userGetMyInfo();
 
   return (
     <main className="bg-default bg-opacity-25">
@@ -35,13 +34,15 @@ const Settings = () => {
               <h2 className="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
                 {myData?.data?.name}
               </h2>
-              {myData?.data?.isVerified&&<Chip
-                startContent={<CheckIcon size={18} />}
-                variant="faded"
-                color="primary"
-              >
-                Verified
-              </Chip>}
+              {myData?.data?.isVerified && (
+                <Chip
+                  color="primary"
+                  startContent={<CheckIcon size={18} />}
+                  variant="faded"
+                >
+                  Verified
+                </Chip>
+              )}
               <span
                 aria-hidden="true"
                 className="inline-block fas fa-certificate fa-lg text-blue-500 
@@ -65,7 +66,9 @@ const Settings = () => {
 
             <ul className="hidden md:flex space-x-8 mb-4">
               <li>
-                <span className="font-semibold mr-1">{myData?.data?.posts?.length} </span>
+                <span className="font-semibold mr-1">
+                  {myData?.data?.posts?.length}{" "}
+                </span>
                 posts
               </li>
 
@@ -84,13 +87,13 @@ const Settings = () => {
             </ul>
 
             <div className="hidden md:block">
-              <h1 className="font-semibold">Address: {myData?.data?.address}</h1>
-              <span></span>
+              <h1 className="font-semibold">
+                Address: {myData?.data?.address}
+              </h1>
+              <span />
               <p>Mobile: {myData?.data?.phone}</p>
             </div>
           </div>
-
-
         </header>
 
         <div className="flex w-full flex-col items-center">
@@ -120,7 +123,7 @@ const Settings = () => {
               }
             >
               <Card>
-                <CardBody >
+                <CardBody>
                   <Following />
                 </CardBody>
               </Card>

@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
@@ -55,13 +55,14 @@ export const getAllposts = async () => {
 export const getSinglePost = async (postId: string) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
   const url = `http://localhost:5000/api/posts/${postId}`;
-  const accessToken = cookies().get('accessToken')?.value
+  const accessToken = cookies().get("accessToken")?.value;
+
   try {
     const res = await fetch(url, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
     const result = await res.json();
 
@@ -71,8 +72,6 @@ export const getSinglePost = async (postId: string) => {
     throw new Error(error);
   }
 };
-
-
 
 export const updatePostVote = async (
   postId: string,
@@ -111,11 +110,7 @@ export const updatePostVote = async (
   }
 };
 
-export const updatePost = async (
-  postId: string,
-  postData: FieldValues
-) => {
-
+export const updatePost = async (postId: string, postData: FieldValues) => {
   const url = `http://localhost:5000/api/posts/${postId}`;
 
   try {
@@ -134,15 +129,13 @@ export const updatePost = async (
   }
 };
 
-
-
 export const deletePost = async ({ postId }: { postId: string }) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
   const url = `http://localhost:5000/api/posts/${postId}`;
 
   try {
     const res = await fetch(url, {
-      method: "DELETE"
+      method: "DELETE",
     });
     const result = await res.json();
 

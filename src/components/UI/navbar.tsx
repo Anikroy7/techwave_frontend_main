@@ -22,14 +22,16 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { Avatar } from "@nextui-org/avatar";
-import { AiFillLock } from 'react-icons/ai';
+import { AiFillLock } from "react-icons/ai";
+import { Button } from "@nextui-org/button";
+import { Chip } from "@nextui-org/chip";
+
 import Loading from "./Loading";
+
 import { useUser } from "@/src/context/user.provider";
 import { ThemeSwitch } from "@/src/components/UI/theme-switch";
 import { siteConfig } from "@/src/config/site";
 import { logout } from "@/src/services/authService";
-import { Button } from "@nextui-org/button";
-import { Chip } from "@nextui-org/chip";
 import { CheckIcon } from "@/src/assets/icons";
 
 export const Navbar = () => {
@@ -79,33 +81,37 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
-        {user?.role !== 'admin' && <NavbarItem className="hidden sm:flex gap-2">
-          {user?.isVerified ? <Chip
-            variant="shadow"
-            startContent={<CheckIcon size={18} />}
-            size='lg'
-            classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-              content: "drop-shadow shadow-black text-white",
-            }}
-          >
-            Verified
-          </Chip> : <Button
-            className="bg-blue-500 text-white flex items-center ml-4"
-            onClick={() => router.push("/make-payment")}
-          >
-            <AiFillLock className="h-5 w-5 mr-2" />
-            Try Premium
-          </Button>}
-
-        </NavbarItem>}
+        {user?.role !== "admin" && (
+          <NavbarItem className="hidden sm:flex gap-2">
+            {user?.isVerified ? (
+              <Chip
+                classNames={{
+                  base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+                  content: "drop-shadow shadow-black text-white",
+                }}
+                size="lg"
+                startContent={<CheckIcon size={18} />}
+                variant="shadow"
+              >
+                Verified
+              </Chip>
+            ) : (
+              <Button
+                className="bg-blue-500 text-white flex items-center ml-4"
+                onClick={() => router.push("/make-payment")}
+              >
+                <AiFillLock className="h-5 w-5 mr-2" />
+                Try Premium
+              </Button>
+            )}
+          </NavbarItem>
+        )}
       </NavbarContent>
       <div>
         <NavbarContent className="sm:hidden basis-1 pl-4">
           <ThemeSwitch />
           <NavbarMenuToggle />
         </NavbarContent>
-
 
         <NavbarContent>
           <Dropdown placement="bottom-end">

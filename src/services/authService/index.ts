@@ -4,9 +4,7 @@ import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
 
-
 export const signupUser = async (userData: FieldValues) => {
-  // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
   const url = `http://localhost:5000/api/auth/signup`;
 
   try {
@@ -91,9 +89,9 @@ export const updateUser = async (userData: FieldValues) => {
 };
 export const updateSingleUser = async (
   userId: string,
-  userData: FieldValues
+  userData: FieldValues,
 ) => {
-  console.log('upaet user', userId, userData)
+  console.log("upaet user", userId, userData);
   const url = `http://localhost:5000/api/users/${userId}`;
 
   try {
@@ -141,7 +139,6 @@ export const getCurrentUser = async () => {
   return decodedToken;
 };
 
-
 export const forgetPassword = async (userData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
   const url = `http://localhost:5000/api/auth/forget-password`;
@@ -166,16 +163,16 @@ export const forgetPassword = async (userData: FieldValues) => {
 export const resetPassword = async (bodyData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
   const url = `http://localhost:5000/api/auth/reset-password`;
-  const { email, password, token } = bodyData
-  console.log('bodyData resete', bodyData,  email, password, token)
+  const { email, password, token } = bodyData;
+
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ email, newPassword:password }),
+      body: JSON.stringify({ email, newPassword: password }),
     });
     const result = await res.json();
 

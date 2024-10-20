@@ -1,5 +1,5 @@
-import { Card } from '@nextui-org/card';
-import { FaRegEye, FaRegCommentDots, FaRegThumbsUp } from 'react-icons/fa';
+import { Card } from "@nextui-org/card";
+import { FaRegEye, FaRegCommentDots, FaRegThumbsUp } from "react-icons/fa";
 
 const AdminDashboard = () => {
   return (
@@ -44,19 +44,19 @@ const AdminDashboard = () => {
         {/* Readers Summary */}
         <Card className=" p-4 flex-1">
           <h3 className="text-lg font-bold mb-4">Readers Summary</h3>
-          <div className="bg-purple-500 h-48 rounded-md"></div>
+          <div className="bg-purple-500 h-48 rounded-md" />
         </Card>
 
         {/* Reactions Summary */}
         <Card className=" p-4 flex-1">
           <h3 className="text-lg font-bold mb-4">Reactions Summary</h3>
-          <div className="bg-cyan-500 h-48 rounded-md"></div>
+          <div className="bg-cyan-500 h-48 rounded-md" />
         </Card>
 
         {/* Comments Summary */}
         <Card className=" p-4 flex-1">
           <h3 className="text-lg font-bold mb-4">Comments Summary</h3>
-          <div className="bg-teal-500 h-48 rounded-md"></div>
+          <div className="bg-teal-500 h-48 rounded-md" />
         </Card>
       </div>
     </div>

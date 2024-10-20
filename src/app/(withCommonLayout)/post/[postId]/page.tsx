@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import PostDetails from '@/src/components/post/PostDetails';
-import React from 'react';
+import React from "react";
+
+import PostDetails from "@/src/components/post/PostDetails";
 
 const page = ({ params }: { params: { postId: string } }) => {
-
   return (
     <>
-      <PostDetails postId={params.postId}/>
+      <PostDetails postId={params.postId} />
     </>
   );
 };

@@ -1,11 +1,13 @@
-"use client"
+"use client";
 
 import PaymentDetails from "@/src/components/dashboard/user/PaymentDetails";
 
 const page = () => {
-    
-    return <>
-        <PaymentDetails />
+  return (
+    <>
+      <PaymentDetails />
     </>
-}
+  );
+};
+
 export default page;

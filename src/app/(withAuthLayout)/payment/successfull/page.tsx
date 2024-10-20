@@ -1,10 +1,11 @@
 import PaymentSuccess from "@/src/components/UI/Payment/PaymentSuccess";
 
-
 const page = () => {
-
-    return <>
-        <PaymentSuccess />
+  return (
+    <>
+      <PaymentSuccess />
     </>
-}
+  );
+};
+
 export default page;

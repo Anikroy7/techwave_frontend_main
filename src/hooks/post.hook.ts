@@ -48,14 +48,12 @@ export const useGetAllposts = () => {
     queryFn: async () => await getAllposts(),
   });
 };
-export const useGetSinglePost = (postId:string) => {
+export const useGetSinglePost = (postId: string) => {
   return useQuery({
     queryKey: ["GET_SINGLE_POST"],
     queryFn: async () => await getSinglePost(postId),
   });
 };
-
-
 
 export const useUpdatePostVote = () => {
   return useMutation<
@@ -88,13 +86,12 @@ export const useUpdatePostVote = () => {
   });
 };
 
-
 export const useUpdatePost = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["UPDATE_POST"],
 
-    mutationFn: async ({ postId, postData}) =>
-      await updatePost(postId,postData),
+    mutationFn: async ({ postId, postData }) =>
+      await updatePost(postId, postData),
     onSuccess: (data) => {
       if (data) {
         if (data.success) {
@@ -116,20 +113,15 @@ export const useUpdatePost = () => {
   });
 };
 export const useDeletePost = () => {
-  return useMutation<
-    any,
-    Error,
-    { postId: string; }
-  >({
+  return useMutation<any, Error, { postId: string }>({
     mutationKey: ["DELETE_POST"],
 
-    mutationFn: async (postId) =>
-      await deletePost(postId),
+    mutationFn: async (postId) => await deletePost(postId),
     onSuccess: (data) => {
       if (data) {
         if (data.success) {
-          queryClient.invalidateQueries({ queryKey: ['GET_ALL_POSTS'] })
-          queryClient.invalidateQueries({ queryKey: ['GET_MY_POSTS'] })
+          queryClient.invalidateQueries({ queryKey: ["GET_ALL_POSTS"] });
+          queryClient.invalidateQueries({ queryKey: ["GET_MY_POSTS"] });
           toast.success(data.message);
         }
         if (!data.success) {

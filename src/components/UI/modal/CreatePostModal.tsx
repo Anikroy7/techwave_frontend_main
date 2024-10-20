@@ -12,14 +12,16 @@ import {
 } from "@nextui-org/modal";
 
 import CreatePostComponent from "../../post/CreatePostComponent";
-import { useUser } from "@/src/context/user.provider";
 import Loading from "../Loading";
+
+import { useUser } from "@/src/context/user.provider";
 
 export default function CreatePostModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { user, isLoading } = useUser()
+  const { user, isLoading } = useUser();
 
-  if (user?.role) return <> </>
+  if (user?.role) return <> </>;
+
   return (
     <>
       {isLoading && <Loading />}

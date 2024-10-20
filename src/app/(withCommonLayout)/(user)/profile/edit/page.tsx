@@ -22,9 +22,11 @@ type FormInput = {
 };
 
 const ProfileEditPage = () => {
-  const { data: myData, isPending: myInfoPending } = userGetMyInfo()
-  const { setIsLoading } = useUser()
-  const [avatarPreview, setAvatarPreview] = useState(myData?.data?.profileImage);
+  const { data: myData, isPending: myInfoPending } = userGetMyInfo();
+  const { setIsLoading } = useUser();
+  const [avatarPreview, setAvatarPreview] = useState(
+    myData?.data?.profileImage,
+  );
   const [newImage, setNewImage] = useState<File | null>(null);
   const {
     mutate: handleUpdateUser,
@@ -51,8 +53,7 @@ const ProfileEditPage = () => {
   useEffect(() => {
     if (!isPending && isSuccess && data?.success) {
       router.push("/profile/settings");
-      setIsLoading(true)
-
+      setIsLoading(true);
     }
   }, [isPending, isSuccess]);
 
