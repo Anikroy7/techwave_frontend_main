@@ -4,8 +4,8 @@ import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
-import React, { useEffect, useState } from "react";
-import { AiFillLike, AiFillDislike, AiOutlineComment, AiOutlineLike, AiOutlineDislike, AiOutlineEye } from "react-icons/ai";
+import React, { useEffect, useRef, useState } from "react";
+import { AiFillLike, AiFillDislike, AiOutlineComment, AiOutlineLike, AiOutlineDislike, AiOutlineEye, AiOutlineFilePdf } from "react-icons/ai";
 import { FiCheckCircle } from 'react-icons/fi';
 import Comments from "../post/Comments";
 import { TPost } from "@/src/types";
@@ -16,6 +16,8 @@ import PostDropdown from "../post/PostDropdown";
 import { useRouter } from "next/navigation";
 import { Chip } from "@nextui-org/chip";
 import { CheckIcon } from "@/src/assets/icons";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
 
@@ -26,6 +28,7 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
   const debouncedDownvote = useDebounce(downvote.length, 2000);
   const router = useRouter()
   const { user } = useUser();
+  const postcardPdf = useRef(null)
 
   const handleUpvoteCount = () => {
     if (upvote.includes(user?.userId as string)) {
@@ -52,10 +55,38 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
     }
   }, [debouncedUpvote, debouncedDownvote])
 
+
+  const handleGeneratePdf = async () => {
+    const inputData = postcardPdf.current
+    if (!inputData) {
+      console.error("Element not found!");
+      return;
+    }
+    try {
+      const canvas = await html2canvas(inputData);
+      const imgData = canvas.toDataURL('image/png');
+
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "in",
+        format: 'a4'
+      });
+
+      const width = pdf.internal.pageSize.getWidth()
+      const height = (canvas.height * width) / canvas.width
+
+      pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+      pdf.save('postcard.pdf')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
 
     <Card className="my-4 w-full shadow-lg cursor-pointer " >
-      <div className="flex p-4">
+
+      <div className="flex p-4" ref={postcardPdf}>
         <Avatar
           alt={post.user.name}
           className="mr-4"
@@ -139,8 +170,15 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
               {downvote.length}
             </Button>
           )}
-          <Button onClick={()=>router.push(`/post/${post._id}`)} isIconOnly color="warning" variant="faded" aria-label="See Details">
+          <Button onClick={() => router.push(`/post/${post._id}`)} isIconOnly color="warning" variant="faded" aria-label="See Details">
             <AiOutlineEye className="h-5 w-5" />
+          </Button>
+          <Button
+            className=" w-40"
+            startContent={<AiOutlineFilePdf />}
+            onClick={() => handleGeneratePdf()}
+          >
+            Generate PDF
           </Button>
         </div>
         <Button startContent={<AiOutlineComment />}>
