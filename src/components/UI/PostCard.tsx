@@ -171,14 +171,14 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
             </Button>
           )}
           <Button onClick={() => router.push(`/post/${post._id}`)} isIconOnly color="warning" variant="faded" aria-label="See Details">
-            <AiOutlineEye className="h-5 w-5" />
+            <AiOutlineEye />
           </Button>
           <Button
-            className=" w-40"
-            startContent={<AiOutlineFilePdf />}
+            color="default"
+            isIconOnly
             onClick={() => handleGeneratePdf()}
           >
-            Generate PDF
+            <AiOutlineFilePdf className="h-5 w-5"  />
           </Button>
         </div>
         <Button startContent={<AiOutlineComment />}>
