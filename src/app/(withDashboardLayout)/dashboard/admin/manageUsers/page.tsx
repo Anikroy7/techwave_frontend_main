@@ -15,11 +15,11 @@ import { Tooltip } from "@nextui-org/tooltip";
 import { DeleteIcon } from "@/src/assets/icons";
 import UpdateUserForm from "@/src/components/dashboard/admin/UpdateUserForm";
 import Loading from "@/src/components/UI/Loading";
-import { userGetAllUsers, useUpdateSingleUser } from "@/src/hooks/user.hook";
+import { useGetAllUsers, useUpdateSingleUser } from "@/src/hooks/user.hook";
 import { TUser } from "@/src/types";
 
 export default function ALlUsersTable() {
-  const { data, isPending } = userGetAllUsers();
+  const { data, isPending } = useGetAllUsers();
   const { mutate: handleUserUpdate } = useUpdateSingleUser();
   const handleUpdateUserStatus = (id: string, status: "active" | "blocked") => {
     handleUserUpdate({ userData: { status }, userId: id });

@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/button";
 import { Modal, ModalContent, useDisclosure } from "@nextui-org/modal";
 import { Tooltip } from "@nextui-org/tooltip";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import TWForm from "../../UI/form/TWForm";
@@ -22,7 +22,6 @@ type FormValue = {
 export default function UpdateUserForm({ user }: { user: TUser }) {
   let { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { mutate: handleUserUpdate, isSuccess } = useUpdateSingleUser();
-  const [modalClose, setModalClose] = useState(false);
   const router = useRouter();
 
   const onSubmit = (data: FormValue) => {
@@ -33,7 +32,7 @@ export default function UpdateUserForm({ user }: { user: TUser }) {
     if (isSuccess) {
       router.push("/dashboard/admin/manage-users");
     }
-  }, [isSuccess, modalClose]);
+  }, [isSuccess]);
 
   return (
     <>

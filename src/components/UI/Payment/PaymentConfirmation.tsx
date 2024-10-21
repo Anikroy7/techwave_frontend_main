@@ -114,9 +114,9 @@ const PaymentConfirmation = () => {
 
         <div className="mt-8 text-sm text-gray-500">
           <p className="text-center">
-            By clicking "Confirm Payment", you agree to our monthly recurring
-            charge of $20 for premium access. You can cancel at any time in your
-            account settings.
+            By clicking &quot;Confirm Payment&quot;, you agree to our monthly
+            recurring charge of $20 for premium access. You can cancel at any
+            time in your account settings.
           </p>
         </div>
       </Card>

@@ -2,11 +2,11 @@ import { Avatar } from "@nextui-org/avatar";
 
 import Loading from "./Loading";
 
-import { userGetMyInfo } from "@/src/hooks/user.hook";
+import { useGetMyInfo } from "@/src/hooks/user.hook";
 import { TUser } from "@/src/types";
 
-const Follwers = () => {
-  const { data: myData, isPending: myInfoPending } = userGetMyInfo();
+const Followers = () => {
+  const { data: myData, isPending: myInfoPending } = useGetMyInfo();
 
   return (
     <div className="flex flex-col gap-6 w-96">
@@ -27,10 +27,10 @@ const Follwers = () => {
           </div>
         ))
       ) : (
-        <p className="text-center">"No followers avaiable"</p>
+        <p className="text-center">No followers available</p>
       )}
     </div>
   );
 };
 
-export default Follwers;
+export default Followers;

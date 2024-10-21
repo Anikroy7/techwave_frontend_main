@@ -2,6 +2,7 @@
 
 import Loading from "../UI/Loading";
 import PostCard from "../UI/PostCard";
+
 import { useGetAllposts } from "@/src/hooks/post.hook";
 import { TPost } from "@/src/types";
 

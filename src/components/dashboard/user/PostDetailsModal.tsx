@@ -41,7 +41,7 @@ export default function PostDetailsModal({ post }: { post: TPost }) {
       </Button>
       <Modal isOpen={isOpen} size={"4xl"} onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <section className="p-6 my-4">
                 {/* User Info */}

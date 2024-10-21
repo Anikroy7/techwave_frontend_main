@@ -1,7 +1,9 @@
 import { Controller } from "react-hook-form";
-import ReactQuill from "react-quill";
-
+const ReactQuill = dynamic(import("react-quill"), {
+  ssr: false,
+});
 import { IInput } from "@/src/types";
+import dynamic from "next/dynamic";
 
 const toolbarOptions = [
   [{ header: "1" }, { header: "2" }, { font: [] }],

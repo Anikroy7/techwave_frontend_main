@@ -26,7 +26,7 @@ const Page = () => {
 
   useEffect(() => {
     if (!isPending && isSuccess && data?.success) {
-      router.push("/link-send-successfull");
+      router.push("/linkSendSuccessfull");
     }
   }, [isPending, isSuccess]);
 

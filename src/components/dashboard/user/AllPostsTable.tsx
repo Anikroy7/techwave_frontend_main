@@ -8,13 +8,13 @@ import { useGetMyposts } from "@/src/hooks/post.hook";
 
 export default function AllPostsTable() {
   const { user, isLoading } = useUser();
+  const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
 
   if (isLoading) return <Loading />;
-  const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
 
   return (
     <>
-      {isPending && isPending}
+      {isPending && <Loading />}
       <PostsTable posts={data?.data} />
     </>
   );

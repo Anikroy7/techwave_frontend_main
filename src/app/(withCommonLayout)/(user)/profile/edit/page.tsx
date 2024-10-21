@@ -12,7 +12,7 @@ import { useUser } from "@/src/context/user.provider";
 import { useUpdateUser } from "@/src/hooks/auth.hook";
 import updateUserValidationSchema from "@/src/schemas/updateUser.schema";
 import uploadImage from "@/src/utils/uploadImage";
-import { userGetMyInfo } from "@/src/hooks/user.hook";
+import { useGetMyInfo } from "@/src/hooks/user.hook";
 
 type FormInput = {
   name: string;
@@ -22,7 +22,7 @@ type FormInput = {
 };
 
 const ProfileEditPage = () => {
-  const { data: myData, isPending: myInfoPending } = userGetMyInfo();
+  const { data: myData, isPending: myInfoPending } = useGetMyInfo();
   const { setIsLoading } = useUser();
   const [avatarPreview, setAvatarPreview] = useState(
     myData?.data?.profileImage,

@@ -8,8 +8,9 @@ import { TPost } from "@/src/types";
 const Myposts = () => {
   const { user, isLoading } = useUser();
 
-  if (isLoading) return <Loading />;
   const { data, isPending } = useGetMyposts({ userId: user?.userId as string });
+
+  if (isLoading) return <Loading />;
 
   return (
     <>

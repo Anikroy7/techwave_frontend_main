@@ -10,8 +10,6 @@ import { useGetSinglePost } from "@/src/hooks/post.hook";
 export default function PostDetails({ postId }: { postId: string }) {
   const { data, isPending } = useGetSinglePost(postId);
 
-  console.log(data);
-
   return (
     <section className="max-w-2xl mx-auto py-10 px-4">
       {isPending && <Loading />}

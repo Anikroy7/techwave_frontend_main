@@ -49,14 +49,14 @@ export const useUpdateFollowers = () => {
   });
 };
 
-export const userGetMyInfo = () => {
+export const useGetMyInfo = () => {
   return useQuery({
     queryKey: ["GET_MY_INFO"],
     queryFn: async () => await getMyInfo(),
   });
 };
 
-export const userGetAllUsers = () => {
+export const useGetAllUsers = () => {
   return useQuery({
     queryKey: ["GET_ALL_USERS"],
     queryFn: async () => await getAllUsers(),

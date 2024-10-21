@@ -5,7 +5,7 @@ import { FieldValues } from "react-hook-form";
 
 export const createOrder = async (orderData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `http://localhost:5000/api/orders`;
+  const url = `https://techwave-backend-six.vercel.app/api/orders`;
 
   try {
     const res = await fetch(url, {
@@ -24,18 +24,18 @@ export const createOrder = async (orderData: FieldValues) => {
 };
 
 export const getSingleOrder = async (id: string) => {
-  const res = await fetch(`http://localhost:5000/api/orders/my-order/${id}`);
+  const res = await fetch(`https://techwave-backend-six.vercel.app/api/orders/my-order/${id}`);
 
   return await res.json();
 };
 export const getAllOrders = async () => {
-  const res = await fetch(`http://localhost:5000/api/orders`);
+  const res = await fetch(`https://techwave-backend-six.vercel.app/api/orders`);
 
   return await res.json();
 };
 
 export const getMyOrder = async (userInfo: { userId: string }) => {
-  const url = `http://localhost:5000/api/orders/my-order`;
+  const url = `https://techwave-backend-six.vercel.app/api/orders/my-order`;
   const accessToken = cookies().get("accessToken");
   const refreshToken = cookies().get("refreshToken");
 
@@ -55,7 +55,7 @@ export const getMyOrder = async (userInfo: { userId: string }) => {
     const result = await res.json();
 
     if (result.data) {
-      const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+      const res = await fetch("https://techwave-backend-six.vercel.app/api/auth/refresh-token", {
         method: "POST",
         credentials: "include",
         headers: {

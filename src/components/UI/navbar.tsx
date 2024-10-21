@@ -98,7 +98,7 @@ export const Navbar = () => {
             ) : (
               <Button
                 className="bg-blue-500 text-white flex items-center ml-4"
-                onClick={() => router.push("/make-payment")}
+                onClick={() => router.push("/makePayment")}
               >
                 <AiFillLock className="h-5 w-5 mr-2" />
                 Try Premium

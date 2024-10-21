@@ -3,11 +3,11 @@ import { Button } from "@nextui-org/button";
 
 import Loading from "./Loading";
 
-import { userGetMyInfo, useUpdateFollowers } from "@/src/hooks/user.hook";
+import { useGetMyInfo, useUpdateFollowers } from "@/src/hooks/user.hook";
 import { TUser } from "@/src/types";
 
 const Following = () => {
-  const { data: myData, isPending: myInfoPending } = userGetMyInfo();
+  const { data: myData, isPending: myInfoPending } = useGetMyInfo();
   const { mutate: handleUpdateFollowers } = useUpdateFollowers();
 
   const handleUnFollow = (postUserId: string) => {
@@ -46,15 +46,10 @@ const Following = () => {
             >
               Unfollow
             </Button>
-            {/* <Button
-                        variant="solid"
-                        className="bg-red-600"
-                    >
-                    </Button> */}
           </div>
         ))
       ) : (
-        <p className="text-center">"No followers avaiable"</p>
+        <p className="text-center">No followers available</p>
       )}
     </div>
   );

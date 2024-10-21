@@ -9,11 +9,11 @@ import Loading from "@/src/components/UI/Loading";
 import Myposts from "@/src/components/post/Myposts";
 import Followers from "@/src/components/UI/Follwers";
 import Following from "@/src/components/UI/Following";
-import { userGetMyInfo } from "@/src/hooks/user.hook";
+import { useGetMyInfo } from "@/src/hooks/user.hook";
 import { CheckIcon } from "@/src/assets/icons";
 
 const Settings = () => {
-  const { data: myData, isPending: myInfoPending } = userGetMyInfo();
+  const { data: myData, isPending: myInfoPending } = useGetMyInfo();
 
   return (
     <main className="bg-default bg-opacity-25">

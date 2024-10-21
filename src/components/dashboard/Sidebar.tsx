@@ -11,7 +11,6 @@ import { adminMenuItems, userMenuItems } from "@/src/config/dashboardMenu";
 
 const Sidebar = () => {
   const { user, isLoading } = useUser();
-  const paths = window.location.pathname.split("/");
 
   return (
     <div className="flex flex-col w-64 h-screen shadow-lg">
@@ -30,7 +29,7 @@ const Sidebar = () => {
         <ul className="space-y-2">
           <li>
             <Link
-              className={`flex items-center px-4 py-2 hover:bg-gray-700 ${paths.length === 2 && "bg-slate-800"} transition-colors`}
+              className={`flex items-center px-4 py-2 hover:bg-gray-700  transition-colors`}
               href="/dashboard"
             >
               <FaTachometerAlt className="h-5 w-5" />
@@ -52,7 +51,7 @@ const Sidebar = () => {
             : userMenuItems.map((item, index) => (
                 <li key={index}>
                   <Link
-                    className={`${paths.includes(item.path) && "bg-slate-800"} flex items-center px-4 py-2 hover:bg-gray-700 transition-colors`}
+                    className={` flex items-center px-4 py-2 hover:bg-gray-700 transition-colors`}
                     href={`/dashboard/${item.path}`}
                   >
                     {item.icon}

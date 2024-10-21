@@ -82,7 +82,7 @@ const LoginPage = () => {
             <div className="text-right">
               <Link
                 className="text-sm text-default-500 hover:text-default-700"
-                href="/forgot-password"
+                href="/forgotPassword"
               >
                 Forgot Password?
               </Link>

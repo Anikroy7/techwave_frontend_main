@@ -5,19 +5,22 @@ import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { ModalBody } from "@nextui-org/modal";
 import { MdClose, MdOutlineAttachment } from "react-icons/md";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Include styles for Quill
+// const ReactQuill = dynamic(import("react-quill"), {
+//   ssr: false,
+// });
+import "react-quill/dist/quill.snow.css"; 
 import { Badge } from "@nextui-org/badge";
 import { useRouter } from "next/navigation";
-
 import TWSelect from "../UI/form/TWSelect";
 import TWForm from "../UI/form/TWForm";
 import Loading from "../UI/Loading";
-
 import { getCategories } from "@/src/services/categoryService";
 import { uploadMultipleImages } from "@/src/utils/uploadMultipleImages";
 import { useUser } from "@/src/context/user.provider";
 import { useCreatePost } from "@/src/hooks/post.hook";
+import dynamic from "next/dynamic";
+import TWInput from "../UI/form/TWInput";
+// import ReactQuill from "react-quill";
 
 type ICategory = {
   title: string;
@@ -25,6 +28,7 @@ type ICategory = {
 
 type TFormInput = {
   category: string;
+  body: string
 };
 
 export default function CreatePostComponent() {
@@ -87,7 +91,7 @@ export default function CreatePostComponent() {
       imageUrls = await uploadMultipleImages(images);
     }
     const postData = {
-      body: content,
+      body: data.body,
       attachments: imageUrls,
       category: data.category,
       user: user?.userId,
@@ -119,12 +123,18 @@ export default function CreatePostComponent() {
           //     confirmPassword: '123456'
           // }}
         >
-          <ReactQuill
+          {/* <ReactQuill
             placeholder="Write your post here..."
             theme="snow"
             value={content}
             onChange={setContent}
-          />
+          /> */}
+          <div className="mt-4">
+            <TWInput
+              label="Tile"
+              name="body"
+            />
+          </div>
           <div className="mt-4">
             <TWSelect
               label="Category"

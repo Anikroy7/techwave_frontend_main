@@ -6,10 +6,9 @@ import { useGetSingleOrder } from "@/src/hooks/order.hook";
 const PaymentDetails = () => {
   const { user, isLoading } = useUser();
 
-  if (isLoading) return <p />;
-  const { data, isPending } = useGetSingleOrder(user?.userId as string);
+  const { data } = useGetSingleOrder(user?.userId as string);
 
-  console.log(data, isPending);
+  if (isLoading) return <p />;
 
   return (
     <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-md">
