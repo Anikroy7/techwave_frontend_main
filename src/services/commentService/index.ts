@@ -2,7 +2,7 @@ import { FieldValues } from "react-hook-form";
 
 export const createComment = async (commentData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/comments`;
+  const url = `http://localhost:5000/api/comments`;
 
   try {
     const res = await fetch(url, {

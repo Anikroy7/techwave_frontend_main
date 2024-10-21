@@ -5,7 +5,7 @@ import { FieldValues } from "react-hook-form";
 
 export const createPost = async (postData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/posts`;
+  const url = `http://localhost:5000/api/posts`;
 
   try {
     const res = await fetch(url, {
@@ -26,7 +26,7 @@ export const createPost = async (postData: FieldValues) => {
 
 export const getMyposts = async (userData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/posts/my-posts?userId=${userData.userId}`;
+  const url = `http://localhost:5000/api/posts/my-posts?userId=${userData.userId}`;
 
   try {
     const res = await fetch(url);
@@ -40,7 +40,7 @@ export const getMyposts = async (userData: FieldValues) => {
 };
 export const getAllposts = async () => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/posts`;
+  const url = `http://localhost:5000/api/posts`;
 
   try {
     const res = await fetch(url);
@@ -54,7 +54,7 @@ export const getAllposts = async () => {
 };
 export const getSinglePost = async (postId: string) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/posts/${postId}`;
+  const url = `http://localhost:5000/api/posts/${postId}`;
   const accessToken = cookies().get("accessToken")?.value;
 
   try {
@@ -92,7 +92,7 @@ export const updatePostVote = async (
       downvote: votes,
     };
   }
-  const url = `https://techwave-backend-six.vercel.app/api/posts/${postId}`;
+  const url = `http://localhost:5000/api/posts/${postId}`;
 
   try {
     const res = await fetch(url, {
@@ -111,7 +111,7 @@ export const updatePostVote = async (
 };
 
 export const updatePost = async (postId: string, postData: FieldValues) => {
-  const url = `https://techwave-backend-six.vercel.app/api/posts/${postId}`;
+  const url = `http://localhost:5000/api/posts/${postId}`;
 
   try {
     const res = await fetch(url, {
@@ -131,7 +131,7 @@ export const updatePost = async (postId: string, postData: FieldValues) => {
 
 export const deletePost = async ({ postId }: { postId: string }) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/posts/${postId}`;
+  const url = `http://localhost:5000/api/posts/${postId}`;
 
   try {
     const res = await fetch(url, {

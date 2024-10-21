@@ -52,6 +52,7 @@ export type TPost = {
   comments: TComment[];
   upvote: string[];
   downvote: string[];
+  isPaid: boolean;
   user: {
     _id: string;
     name: string;
@@ -65,6 +66,7 @@ export type TPost = {
 };
 
 export type TOrder = {
+  _id: string;
   user: TUser;
   paymentStatus: "Pending" | "Paid" | "Failed";
   transactionId: string;

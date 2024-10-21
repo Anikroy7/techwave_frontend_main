@@ -5,7 +5,7 @@ import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
 
 export const signupUser = async (userData: FieldValues) => {
-  const url = `https://techwave-backend-six.vercel.app/api/auth/signup`;
+  const url = `http://localhost:5000/api/auth/signup`;
 
   try {
     const res = await fetch(url, {
@@ -25,7 +25,7 @@ export const signupUser = async (userData: FieldValues) => {
 };
 
 export const loginUser = async (userData: FieldValues) => {
-  const url = `https://techwave-backend-six.vercel.app/api/auth/signin`;
+  const url = `http://localhost:5000/api/auth/signin`;
 
   try {
     const res = await fetch(url, {
@@ -49,7 +49,7 @@ export const loginUser = async (userData: FieldValues) => {
 };
 
 export const updateUser = async (userData: FieldValues) => {
-  const url = `https://techwave-backend-six.vercel.app/api/users/me`;
+  const url = `http://localhost:5000/api/users/me`;
   const accessToken = cookies().get("accessToken");
   const refreshToken = cookies().get("refreshToken");
 
@@ -66,7 +66,7 @@ export const updateUser = async (userData: FieldValues) => {
     const result = await res.json();
 
     if (result.message) {
-      const res = await fetch("https://techwave-backend-six.vercel.app/api/auth/refresh-token", {
+      const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -92,7 +92,7 @@ export const updateSingleUser = async (
   userId: string,
   userData: FieldValues,
 ) => {
-  const url = `https://techwave-backend-six.vercel.app/api/users/${userId}`;
+  const url = `http://localhost:5000/api/users/${userId}`;
 
   try {
     const res = await fetch(url, {
@@ -141,7 +141,7 @@ export const getCurrentUser = async () => {
 
 export const forgetPassword = async (userData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/auth/forget-password`;
+  const url = `http://localhost:5000/api/auth/forget-password`;
 
   try {
     const res = await fetch(url, {
@@ -162,7 +162,7 @@ export const forgetPassword = async (userData: FieldValues) => {
 
 export const resetPassword = async (bodyData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `https://techwave-backend-six.vercel.app/api/auth/reset-password`;
+  const url = `http://localhost:5000/api/auth/reset-password`;
   const { email, password, token } = bodyData;
 
   try {

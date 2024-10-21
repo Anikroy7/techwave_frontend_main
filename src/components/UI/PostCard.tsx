@@ -90,7 +90,7 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
   };
 
   return (
-    <Card className="my-4 w-full shadow-lg cursor-pointer ">
+    <Card className="my-4 w-full shadow-lg cursor-pointer">
       <div ref={postcardPdf} className="flex p-4">
         <Avatar
           alt={post.user.name}
@@ -119,11 +119,16 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
           </div>
           <p className="text-gray-500">{post.category}</p>
         </div>
-
         <PostDropdown post={post} userId={post.user._id} />
       </div>
+
       <Divider />
-      <div className="p-4">
+
+      {/* Content section with conditional blur */}
+      <div
+        className={`p-4 ${(user?.role !== "admin" && !user?.isVerified && post?.isPaid) ? "blur-sm pointer-events-none" : ""
+          }`} // Apply blur and disable interaction if not paid
+      >
         <div className="text-sm my-4">
           <div dangerouslySetInnerHTML={{ __html: post.body }} />
         </div>
@@ -140,43 +145,35 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
           </div>
         )}
       </div>
+
+      {/* Overlay message for paid content */}
+      {(user?.role !== "admin" && !user?.isVerified && post?.isPaid) && (
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center text-white text-lg">
+          <p>Unlock this content by subscribing to premium.</p>
+        </div>
+      )}
+
       <Divider />
-      <div className="flex justify-between p-4">
+
+      {!(user?.role !== "admin" && !user?.isVerified && post?.isPaid) && <div className="flex justify-between p-4">
         <div className="flex items-center space-x-2">
-          {!upvote.includes(user?.userId as string) ? (
-            <Button
-              className="text-blue-500"
-              startContent={<AiOutlineLike />}
-              onClick={handleUpvoteCount}
-            >
-              {upvote.length}
-            </Button>
-          ) : (
-            <Button
-              className="text-blue-500"
-              startContent={<AiFillLike />}
-              onClick={handleUpvoteCount}
-            >
-              {upvote.length}
-            </Button>
-          )}
-          {!downvote.includes(user?.userId as string) ? (
-            <Button
-              className="text-red-500"
-              startContent={<AiOutlineDislike />}
-              onClick={handleDownvoteCount}
-            >
-              {downvote.length}
-            </Button>
-          ) : (
-            <Button
-              className="text-red-500"
-              startContent={<AiFillDislike />}
-              onClick={handleDownvoteCount}
-            >
-              {downvote.length}
-            </Button>
-          )}
+          {/* Disable like and comment buttons if the user hasn't paid */}
+          <Button
+            className="text-blue-500"
+            startContent={!upvote.includes(user?.userId as string) ? <AiOutlineLike /> : <AiFillLike />}
+            onClick={handleUpvoteCount}
+            disabled={post?.isPaid} // Disable when not paid
+          >
+            {upvote.length}
+          </Button>
+          <Button
+            className="text-red-500"
+            startContent={!downvote.includes(user?.userId as string) ? <AiOutlineDislike /> : <AiFillDislike />}
+            onClick={handleDownvoteCount}
+            disabled={post?.isPaid} // Disable when not paid
+          >
+            {downvote.length}
+          </Button>
           <Button
             isIconOnly
             aria-label="See Details"
@@ -195,11 +192,11 @@ const PostCard: React.FC<{ post: TPost }> = ({ post }) => {
           </Button>
         </div>
         <Button startContent={<AiOutlineComment />}>
-          {/* {post.comments.length} Comments */}
           {<Comments post={post} />}
         </Button>
-      </div>
+      </div>}
     </Card>
+
   );
 };
 

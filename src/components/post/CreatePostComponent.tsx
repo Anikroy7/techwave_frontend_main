@@ -8,7 +8,7 @@ import { MdClose, MdOutlineAttachment } from "react-icons/md";
 // const ReactQuill = dynamic(import("react-quill"), {
 //   ssr: false,
 // });
-import "react-quill/dist/quill.snow.css"; 
+import "react-quill/dist/quill.snow.css";
 import { Badge } from "@nextui-org/badge";
 import { useRouter } from "next/navigation";
 import TWSelect from "../UI/form/TWSelect";
@@ -28,7 +28,8 @@ type ICategory = {
 
 type TFormInput = {
   category: string;
-  body: string
+  body: string;
+  isPaid: string
 };
 
 export default function CreatePostComponent() {
@@ -82,6 +83,13 @@ export default function CreatePostComponent() {
       label: c.title,
     };
   });
+  const isPaidObj = [{
+    key: "yes",
+    label: 'Yes',
+  }, {
+    key: 'no',
+    label: "No"
+  }];
   // console.log(categoriessObj)
   const onSubmit = async (data: TFormInput) => {
     // console.log(data, content,newImage
@@ -94,6 +102,7 @@ export default function CreatePostComponent() {
       body: data.body,
       attachments: imageUrls,
       category: data.category,
+      isPaid: data.isPaid === 'yes' ? true : false,
       user: user?.userId,
     };
 
@@ -113,15 +122,15 @@ export default function CreatePostComponent() {
         {/* Rich Text Editor */}
         <TWForm
           onSubmit={onSubmit}
-          // resolver={zodResolver(signupValidationSchema)}
-          // defaultValues={{
-          //     name: "Anik roy",
-          //     email: "anik@gmail.com",
-          //     phone: "017863356131",
-          //     address: "Mirpur",
-          //     password: '123456',
-          //     confirmPassword: '123456'
-          // }}
+        // resolver={zodResolver(signupValidationSchema)}
+        // defaultValues={{
+        //     name: "Anik roy",
+        //     email: "anik@gmail.com",
+        //     phone: "017863356131",
+        //     address: "Mirpur",
+        //     password: '123456',
+        //     confirmPassword: '123456'
+        // }}
         >
           {/* <ReactQuill
             placeholder="Write your post here..."
@@ -140,6 +149,13 @@ export default function CreatePostComponent() {
               label="Category"
               name="category"
               options={categoriessObj}
+            />
+          </div>
+          <div className="mt-4">
+            <TWSelect
+              label="Is Paid"
+              name="isPaid"
+              options={isPaidObj}
             />
           </div>
           <div className="mt-4">
