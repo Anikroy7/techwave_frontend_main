@@ -14,7 +14,7 @@ export default function App() {
       >
         <Follwers />
       </AccordionItem>
-      <AccordionItem key="2" aria-label="ALl Following" title="All Followers">
+      <AccordionItem key="2" aria-label="ALl Following" title="All Followings">
         <Following />
       </AccordionItem>
     </Accordion>

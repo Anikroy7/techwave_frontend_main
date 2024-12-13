@@ -49,7 +49,7 @@ const Following = () => {
           </div>
         ))
       ) : (
-        <p className="text-center">No followers available</p>
+        <p className="text-center">No followings found...</p>
       )}
     </div>
   );

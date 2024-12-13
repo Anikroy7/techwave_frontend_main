@@ -41,6 +41,7 @@ export const Navbar = () => {
     logout();
     router.push("/login");
   };
+  console.log(user)
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       {isLoading && <Loading />}

@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <div className="flex flex-col w-64 h-screen shadow-lg">
       {isLoading && <Loading />}
-      <div className="flex items-center justify-center h-16 ">
+      <div className="flex items-center justify-center h-16 py-4 ">
         <Link href={"/"}>
           <Image
             alt=""

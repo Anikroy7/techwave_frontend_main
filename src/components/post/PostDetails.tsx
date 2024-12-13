@@ -6,13 +6,14 @@ import React from "react";
 import Loading from "../UI/Loading";
 
 import { useGetSinglePost } from "@/src/hooks/post.hook";
+import Comments from "./Comments";
 
 export default function PostDetails({ postId }: { postId: string }) {
   const { data, isPending } = useGetSinglePost(postId);
-
+  if (isPending) return <Loading />
   return (
     <section className="max-w-2xl mx-auto py-10 px-4">
-      {isPending && <Loading />}
+
       <div className=" rounded-lg shadow-md p-6 mb-6">
         <div className="flex items-center mb-4">
           <img
@@ -28,7 +29,7 @@ export default function PostDetails({ postId }: { postId: string }) {
           </div>
         </div>
 
-        <p className="text-gray-800 mb-4">{data?.data?.body}</p>
+        <p className="text-gray-300 mb-4">{data?.data?.body}</p>
 
         {data?.data?.attachments && data?.data?.attachments.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -55,11 +56,12 @@ export default function PostDetails({ postId }: { postId: string }) {
         </div>
       </div>
 
-      {/*  <Card className="mb-6 bg-white shadow-md rounded-lg">
-                <CardBody>
-                    <h2 className="text-2xl font-semibold mb-4">Comments</h2>
-                    <div className="space-y-4">
-                        {post.comments.map((comment, index) => (
+      <Card className="mb-6 shadow-md rounded-lg">
+        <CardBody>
+          <h2 className="text-2xl font-semibold mb-4">Comments</h2>
+          {<Comments post={data?.data} />}
+          {/* <div className="space-y-4">
+                        {data?.data?.comments?.length? data?.data?.comments.map((comment:TComment, index:number) => (
                             <div key={index} className="bg-gray-100 p-4 rounded-lg shadow">
                                 <div className="flex items-center mb-2">
                                     <img src={comment.user.profileImage} alt={`${comment.user.name}'s profile`} className="w-8 h-8 rounded-full mr-2" />
@@ -67,10 +69,10 @@ export default function PostDetails({ postId }: { postId: string }) {
                                 </div>
                                 <p>{comment.text}</p>
                             </div>
-                        ))}
-                    </div>
-                </CardBody>
-            </Card> */}
+                        )):<p className="text-center text-teal-100">No comments found...</p>}
+                    </div> */}
+        </CardBody>
+      </Card>
 
       <Card className="mb-6 shadow-md rounded-lg">
         <CardBody>

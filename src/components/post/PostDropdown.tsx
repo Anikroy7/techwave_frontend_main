@@ -68,7 +68,7 @@ export default function PostDropdown({
           className={`${user?.userId !== userId ? "hidden" : ""}`}
           description="Allows you to edit the post"
           startContent={<EditDocumentIcon className={iconClasses} />}
-          onClick={() => router.push("/dashboard/my-posts")}
+          onClick={() => router.push("/dashboard/myPosts")}
         >
           Edit post
         </DropdownItem>

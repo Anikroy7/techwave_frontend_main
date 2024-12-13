@@ -18,7 +18,6 @@ import { getCategories } from "@/src/services/categoryService";
 import { uploadMultipleImages } from "@/src/utils/uploadMultipleImages";
 import { useUser } from "@/src/context/user.provider";
 import { useCreatePost } from "@/src/hooks/post.hook";
-import dynamic from "next/dynamic";
 import TWInput from "../UI/form/TWInput";
 // import ReactQuill from "react-quill";
 

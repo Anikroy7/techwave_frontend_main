@@ -14,7 +14,7 @@ const PaymentDetails = () => {
     <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4">Payment Details</h1>
       {
-        <div className=" p-4 rounded-lg">
+        data?.user ? <div className=" p-4 rounded-lg">
           <div className="mb-4">
             <span className="font-semibold">User Name:</span>
             <span className="block ">{data?.data?.user.name}</span>
@@ -47,7 +47,9 @@ const PaymentDetails = () => {
               {new Date(data?.data?.endDate).toLocaleDateString()}
             </span>
           </div>
-        </div>
+        </div> : <p className="text-center">
+          No payment history found...
+        </p>
       }
     </div>
   );

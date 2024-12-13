@@ -62,7 +62,7 @@ export default function Comments({ post }: { post: TPost }) {
                 Comments
               </ModalHeader>
               <ModalBody>
-                {comments.length > 0 ? (
+                {comments?.length > 0 ? (
                   comments.map((comment: TComment) => (
                     <div
                       key={comment._id}
