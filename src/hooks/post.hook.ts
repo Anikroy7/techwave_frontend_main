@@ -42,12 +42,22 @@ export const useGetMyposts = (userData: { userId: string }) => {
     queryFn: async () => await getMyposts(userData),
   });
 };
-export const useGetAllposts = () => {
-  return useQuery({
-    queryKey: ["GET_ALL_POSTS"],
-    queryFn: async () => await getAllposts(),
-  });
-};
+  export const useGetAllposts = () => {
+    return useMutation<any, Error, FieldValues>({
+      mutationKey: ["GET_ALL_POSTS"],
+      mutationFn: async (filters) => {
+        return await getAllposts(filters);
+      },
+      onSuccess: (data) => {
+        if (data) {
+          return;
+        }
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
 export const useGetSinglePost = (postId: string) => {
   return useQuery({
     queryKey: ["GET_SINGLE_POST"],

@@ -139,7 +139,7 @@ export default function CreatePostComponent() {
           /> */}
           <div className="mt-4">
             <TWInput
-              label="Tile"
+              label="Body"
               name="body"
             />
           </div>

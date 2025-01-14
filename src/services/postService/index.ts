@@ -1,6 +1,8 @@
 "use server";
 
+import axiosInstance from "@/src/lib/AxiosInstance";
 import { cookies } from "next/headers";
+import { skip } from "node:test";
 import { FieldValues } from "react-hook-form";
 
 export const createPost = async (postData: FieldValues) => {
@@ -26,34 +28,26 @@ export const createPost = async (postData: FieldValues) => {
 
 export const getMyposts = async (userData: FieldValues) => {
   // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `http://localhost:5000/api/posts/my-posts?userId=${userData.userId}`;
+  // const url = `http://localhost:5000/api/posts/my-posts?userId=${userData.userId}`;
 
   try {
-    const res = await fetch(url);
-    const result = await res.json();
+    const { data } = await axiosInstance.get("/posts/my-posts");
 
-    // const result = await fetch('https://jsonplaceholder.typicode.com/todos/')
-    return result;
+    return data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.response?.data?.message || error.message);
   }
 };
-export const getAllposts = async () => {
-  // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
-  const url = `http://localhost:5000/api/posts`;
-
+export const getAllposts = async (filters: FieldValues) => {
   try {
-    const res = await fetch(url);
-    const result = await res.json();
+    const { data } = await axiosInstance.get(`/posts?limit=${filters.limit || 10}&page=${filters.page || ''}`);
 
-    // const result = await fetch('https://jsonplaceholder.typicode.com/todos/')
-    return result;
+    return data;
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.response?.data?.message || error.message);
   }
 };
 export const getSinglePost = async (postId: string) => {
-  // console.log(process.env.NEXT_PUBLIC_BASE_API, 'sdfgasdf')
   const url = `http://localhost:5000/api/posts/${postId}`;
   const accessToken = cookies().get("accessToken")?.value;
 
@@ -66,7 +60,6 @@ export const getSinglePost = async (postId: string) => {
     });
     const result = await res.json();
 
-    // const result = await fetch('https://jsonplaceholder.typicode.com/todos/')
     return result;
   } catch (error: any) {
     throw new Error(error);

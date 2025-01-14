@@ -1,4 +1,5 @@
 "use client";
+import { FaLinkedin, FaHome, FaUsers, FaBriefcase, FaEnvelope, FaBell } from 'react-icons/fa';
 
 import {
   Navbar as NextUINavbar,
@@ -45,18 +46,58 @@ export const Navbar = () => {
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       {isLoading && <Loading />}
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Image
-              alt=""
-              height={100}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo9lsguElms4_3HsOiZYnDQjQc8iRPxN7-Qw&s"
-              width={100}
-            />
-          </NextLink>
-        </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+
+
+      <NextLink className="flex justify-start items-center gap-1" href="/">
+        <Image
+          alt=""
+          height={250}
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo9lsguElms4_3HsOiZYnDQjQc8iRPxN7-Qw&s"
+          width={250}
+        />
+      </NextLink>
+      {/* Search Bar */}
+      <div className="relative hidden md:block">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+        />
+        <svg
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 "
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10 2a8 8 0 100 16 8 8 0 000-16zm-7 8a7 7 0 1112.928 4.072l4.95 4.95a1 1 0 01-1.414 1.414l-4.95-4.95A7 7 0 013 10z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+      <NavbarContent className="basis-1/5 sm:basis-full gap-10 items-center" justify="center">
+
+        <a href="#" className="flex flex-col items-center hover:text-gray-300">
+          <FaHome size={25} />
+          {/* <span className="text-sm">Home</span> */}
+        </a>
+        <a href="#" className="flex flex-col items-center hover:text-gray-250">
+          <FaUsers size={25} />
+          {/* <span className="text-sm">My Network</span> */}
+        </a>
+        <a href="#" className="flex flex-col items-center hover:text-gray-250">
+          <FaBriefcase size={25} />
+          {/* <span className="text-sm">Jobs</span> */}
+        </a>
+        <a href="#" className="flex flex-col items-center hover:text-gray-250">
+          <FaEnvelope size={25} />
+          {/* <span className="text-sm">Messaging</span> */}
+        </a>
+        <a href="#" className="flex flex-col items-center hover:text-gray-250">
+          <FaBell size={25} />
+          {/* <span className="text-sm">Notifications</span> */}
+        </a>
+        {/*   <ul className="hidden lg:flex gap-4 justify-center ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -71,7 +112,7 @@ export const Navbar = () => {
               </NextLink>
             </NavbarItem>
           ))}
-        </ul>
+        </ul> */}
       </NavbarContent>
 
       <NavbarContent
@@ -174,3 +215,5 @@ export const Navbar = () => {
     </NextUINavbar>
   );
 };
+
+

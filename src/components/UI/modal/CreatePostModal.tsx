@@ -26,7 +26,7 @@ export default function CreatePostModal() {
     <>
       {isLoading && <Loading />}
       <Button
-        className="p-6 rounded-lg flex gap-3 items-center bg-transparent"
+        className="p-6 rounded-lg flex gap-3 items-center bg-transparent w-full"
         onPress={onOpen}
       >
         <Avatar src={user?.profileImage} />

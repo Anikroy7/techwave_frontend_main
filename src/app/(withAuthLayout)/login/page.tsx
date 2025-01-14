@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import loginValidationSchema from "@/src/schemas/login.schema";
@@ -20,6 +20,12 @@ export type FormInput = {
 };
 
 const LoginPage = () => {
+  const [creadiantialType, setCrediantialsType] = useState("");
+  const [defaultValues, setDefaultValues] = useState({
+    email: "",
+    password: "",
+  });
+
   const {
     mutate: handleLoginUser,
     isPending,
@@ -46,6 +52,25 @@ const LoginPage = () => {
     }
   }, [isPending, isSuccess]);
 
+
+  useEffect(() => {
+    const newDefaultValues = {
+      email:
+        creadiantialType === "user"
+          ? "anik@gmail.com"
+            : creadiantialType === "admin"
+              ? "admin@gmail.com"
+              : "",
+      password: "123456",
+    };
+
+    setDefaultValues(newDefaultValues);
+  }, [creadiantialType]);
+
+  const handleCredentials = (type: string) => {
+    setCrediantialsType(type);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       {isPending && <Loading />}
@@ -67,9 +92,26 @@ const LoginPage = () => {
 
         {/* Right Section: Login Form */}
         <div className="p-8 rounded-lg shadow-md md:w-1/2 w-full">
+
+          <div className="flex gap-3 w-[100%] mt-6">
+            <Button
+              className="w-full rounded-md bg-default-900 text-default"
+              onClick={() => handleCredentials("admin")}
+            >
+              Admin Credentials
+            </Button>
+
+            <Button
+              className="w-full rounded-md bg-default-900 text-default"
+              onClick={() => handleCredentials("user")}
+            >
+              User Credentials
+            </Button>
+          </div>
           <TWForm
             resolver={zodResolver(loginValidationSchema)}
             onSubmit={onsubmit}
+            defaultValues={defaultValues}
           >
             <div className="my-3">
               <TWInput label="Email" name="email" type="email" />
